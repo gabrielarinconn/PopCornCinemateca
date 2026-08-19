@@ -17,3 +17,6 @@ pnpm-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Agentes de IA locales — nunca se suben al repositorio
+.claude/
