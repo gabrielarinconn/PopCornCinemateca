@@ -11,4 +11,7 @@ export const siteCopy = {
     description: 'La página que buscas no existe o se movió de lugar.',
     backHome: 'Volver al inicio',
   },
+  genericError: {
+    title: 'Algo salió mal. Vuelve a intentarlo.',
+  },
 } as const;
