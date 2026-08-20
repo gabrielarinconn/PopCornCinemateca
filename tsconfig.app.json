@@ -6,6 +6,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "moduleDetection": "force",
     "allowJs": true,
     "resolveJsonModule": true,
@@ -23,7 +24,6 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
 
-    "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["src"]
