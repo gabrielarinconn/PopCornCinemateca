@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+# =============================================================================
+# verify.sh — EL gate de calidad.
+# Contrato: exit 0 ⇒ formato + linter sin advertencias + tipos estrictos +
+#           pruebas verdes + build + sin dependencias deprecadas.
+# Lo usan: .husky/pre-commit (--quick), .husky/pre-push (--full) y el CI (--full).
+# Nunca se saltea y nunca se debilita un paso "para que pase": se arregla el código.
+# =============================================================================
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -10,27 +18,24 @@ fail() { printf '\n%b✖ GATE EN ROJO — %s%b\n' "$RED" "$1" "$NC"; exit 1; }
 START=$(date +%s)
 
 step "[1/5] Formato — Prettier"
-pnpm format:check  fail "hay archivos sin formatear (corran: pnpm format)"
+pnpm format:check || fail "hay archivos sin formatear (corran: pnpm format)"
 
 step "[2/5] Linter — ESLint, cero advertencias"
-pnpm lint 
- fail "el linter encontró problemas"
+pnpm lint || fail "el linter encontró problemas"
 
 step "[3/5] Tipos — tsc --noEmit"
-pnpm check-types  fail "errores de tipos"
+pnpm check-types || fail "errores de tipos"
 
 if [ "$MODE" = "--quick" ]; then
   printf '\n%b✔ GATE RÁPIDO EN VERDE en %ss%b\n' "$GREEN" "$(( $(date +%s) - START ))" "$NC"; exit 0
 fi
 
 step "[4/5] Pruebas — Vitest"
-pnpm test 
- fail "pruebas rojas o cobertura por debajo del umbral"
+pnpm test || fail "pruebas rojas o cobertura por debajo del umbral"
 
 step "[5/5] Build de producción"
-pnpm build  fail "el build falló"
+pnpm build || fail "el build falló"
 
-bash scripts/check-versions.sh --gate 
- fail "hay una dependencia deprecada"
+bash scripts/check-versions.sh --gate || fail "hay una dependencia deprecada"
 
 printf '\n%b✔ GATE COMPLETO EN VERDE en %ss%b\n' "$GREEN" "$(( $(date +%s) - START ))" "$NC"
