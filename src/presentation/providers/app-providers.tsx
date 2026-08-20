@@ -2,13 +2,14 @@ import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ErrorBoundary } from 'react-error-boundary';
+import { siteCopy } from '@/presentation/copy/site';
 
 const queryClient = new QueryClient();
 
 function ErrorFallback(): ReactNode {
   return (
     <div role="alert">
-      <p>Algo salió mal.</p>
+      <p>{siteCopy.genericError.title}</p>
     </div>
   );
 }
