@@ -1,20 +1,9 @@
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { server } from '../../test/msw/server';
 import { createMovieDiscoveryPort, MAX_DISCOVER_PAGE } from './movie-discovery.adapter';
 
-const server = setupServer();
-
-beforeAll(() => {
-  server.listen();
-});
-afterEach(() => {
-  server.resetHandlers();
-});
-afterAll(() => {
-  server.close();
-});
-
+// Servidor MSW global — ver el comentario en configuration.spec.ts.
 const FIXED_TODAY = new Date('2026-01-01');
 
 function respondWith(page: number, totalPages: number, results: unknown[] = []) {
