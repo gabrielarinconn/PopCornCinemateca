@@ -3,6 +3,10 @@ import { cleanup } from '@testing-library/react';
 import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import { server } from './src/test/msw/server';
 
+// Token falso para que src/config/env.ts (y todo lo que importa el cliente
+// HTTP) no muera al arrancar en las pruebas — nunca sale de esta máquina.
+vi.stubEnv('VITE_TMDB_TOKEN', 'x'.repeat(40));
+
 // onUnhandledRequest: 'error' es la línea que hace útil a MSW: una petición que
 // nadie simuló revienta el test en vez de irse a la red de verdad.
 beforeAll(() => {
