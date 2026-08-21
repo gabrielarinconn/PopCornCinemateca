@@ -1,21 +1,12 @@
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { DomainValidationError } from '../../domain/shared/errors/api-errors';
+import { server } from '../../test/msw/server';
 import { getConfiguration } from './configuration';
 
-const server = setupServer();
-
-beforeAll(() => {
-  server.listen();
-});
-afterEach(() => {
-  server.resetHandlers();
-});
-afterAll(() => {
-  server.close();
-});
-
+// Usa el servidor MSW global (arrancado en vitest.setup.ts). Crear otro
+// setupServer() local aquí duplicaba de verdad cada petición: dos capas de
+// interceptores activas a la vez, no solo un doble conteo del espía.
 describe('getConfiguration', () => {
   it('valida y devuelve la configuración de imágenes', async () => {
     server.use(

@@ -14,4 +14,19 @@ export const siteCopy = {
   genericError: {
     title: 'Algo salió mal. Vuelve a intentarlo.',
   },
+  movieDetail: {
+    loading: 'Cargando la ficha...',
+    error: 'No pudimos cargar esta película.',
+    retry: 'Reintentar',
+    noData: 'Sin dato',
+    noRatings: 'Sin valoraciones',
+    fewVotesNotice: 'pocos votos',
+    overviewFallbackNotice:
+      'La sinopsis no está disponible en español. Mostramos la versión en inglés.',
+    budgetLabel: 'Presupuesto',
+    castLabel: 'Elenco',
+    trailersLabel: 'Tráilers',
+    recommendationsLabel: 'Recomendadas',
+    watchOnYouTube: 'Ver en YouTube',
+  },
 } as const;

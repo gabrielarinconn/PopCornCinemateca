@@ -18,6 +18,13 @@ const VideoItemSchema = z.object({
   type: z.string(),
 });
 
+const TranslationItemSchema = z.object({
+  iso_639_1: z.string(),
+  data: z.object({
+    overview: z.string(),
+  }),
+});
+
 // Esquema principal del detalle de la película con 'append_to_response'
 export const MovieDetailSchema = z.object({
   id: z.number(),
@@ -27,6 +34,8 @@ export const MovieDetailSchema = z.object({
   backdrop_path: z.string().nullable(),
   release_date: z.string().optional(),
   vote_average: z.number(),
+  vote_count: z.number(),
+  budget: z.number(),
   genres: z.array(z.object({ id: z.number(), name: z.string() })),
   credits: z
     .object({
@@ -38,14 +47,26 @@ export const MovieDetailSchema = z.object({
       results: z.array(VideoItemSchema),
     })
     .optional(),
+  translations: z
+    .object({
+      translations: z.array(TranslationItemSchema),
+    })
+    .optional(),
 });
 
 export type MovieDetailResponse = z.infer<typeof MovieDetailSchema>;
 
-export const getMovieDetails = async (movieId: number): Promise<MovieDetailResponse> => {
-  // Petición ÚNICA usando append_to_response para traer elenco y tráilers juntos
+export const getMovieDetails = async (
+  movieId: number,
+  language = 'es-ES',
+  signal?: AbortSignal,
+): Promise<MovieDetailResponse> => {
+  // Petición ÚNICA usando append_to_response: elenco, tráilers y las
+  // traducciones (para la sinopsis en inglés si falta la del idioma
+  // pedido) llegan todos juntos, sin peticiones adicionales.
   const { data } = await tmdbClient.get<unknown>(`/movie/${String(movieId)}`, {
-    params: { append_to_response: 'credits,videos' },
+    params: { append_to_response: 'credits,videos,translations', language },
+    ...(signal ? { signal } : {}),
   });
 
   const parsed = MovieDetailSchema.safeParse(data);

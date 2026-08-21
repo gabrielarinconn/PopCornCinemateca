@@ -1,21 +1,10 @@
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { DomainValidationError } from '../../domain/shared/errors/api-errors';
+import { server } from '../../test/msw/server';
 import { getMovieRecommendations } from './recommendations';
 
-const server = setupServer();
-
-beforeAll(() => {
-  server.listen();
-});
-afterEach(() => {
-  server.resetHandlers();
-});
-afterAll(() => {
-  server.close();
-});
-
+// Servidor MSW global — ver el comentario en configuration.spec.ts.
 describe('getMovieRecommendations', () => {
   it('valida y devuelve las recomendaciones de una película', async () => {
     server.use(

@@ -1,11 +1,9 @@
-import { releaseStatusOf } from '@/domain/shared/release-status';
-import { ratingReliabilityFromVotes } from '@/domain/shared/rating-reliability';
 import type {
   DiscoverMoviesFilters,
   MovieDiscoveryPort,
-  MovieSummary,
 } from '@/application/ports/movie-discovery.port';
-import { getDiscoverMovies, type DiscoverResponse } from './discover';
+import { getDiscoverMovies } from './discover';
+import { toMovieSummary } from './movie-summary.mapper';
 
 /** TMDB no sirve más allá de esto, aunque `total_pages` diga otra cosa. */
 export const MAX_DISCOVER_PAGE = 500;
@@ -23,17 +21,6 @@ function buildTmdbParams(
   if (filters.sortBy !== undefined) params.sort_by = filters.sortBy;
 
   return params;
-}
-
-function toMovieSummary(raw: DiscoverResponse['results'][number], today: Date): MovieSummary {
-  return {
-    id: raw.id,
-    title: raw.title,
-    overview: raw.overview,
-    posterPath: raw.poster_path,
-    releaseStatus: releaseStatusOf(raw.release_date ?? '', today),
-    rating: ratingReliabilityFromVotes(raw.vote_average, raw.vote_count),
-  };
 }
 
 export function createMovieDiscoveryPort(today: () => Date = () => new Date()): MovieDiscoveryPort {
