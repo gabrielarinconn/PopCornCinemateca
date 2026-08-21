@@ -12,6 +12,10 @@ const MovieDetailPage = lazy(() =>
   import('./movie-detail-page').then((module) => ({ default: module.MovieDetailPage })),
 );
 
+const SearchPage = lazy(() =>
+  import('./search-page').then((module) => ({ default: module.SearchPage })),
+);
+
 function RouteFallback() {
   return <div aria-busy="true" className="p-8"></div>;
 }
@@ -37,6 +41,14 @@ export const routes: RouteObject[] = [
         element: (
           <Suspense fallback={<RouteFallback />}>
             <MovieDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'buscar',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <SearchPage />
           </Suspense>
         ),
       },

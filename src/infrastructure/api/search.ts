@@ -12,9 +12,14 @@ export const SearchResponseSchema = z.object({
 
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;
 
-export const searchMovies = async (query: string, page = 1): Promise<SearchResponse> => {
+export const searchMovies = async (
+  query: string,
+  page = 1,
+  signal?: AbortSignal,
+): Promise<SearchResponse> => {
   const { data } = await tmdbClient.get<unknown>('/search/movie', {
     params: { query, page },
+    ...(signal ? { signal } : {}),
   });
   const parsed = SearchResponseSchema.safeParse(data);
 
