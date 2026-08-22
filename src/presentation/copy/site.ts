@@ -1,5 +1,5 @@
 export const siteCopy = {
-  appName: 'Cineteca',
+  appName: 'popCorn',
   header: {
     home: 'Inicio',
   },
