@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, redirect } from 'react-router';
+import { createBrowserRouter, redirect, type RouteObject } from 'react-router';
 import { AppShell } from '@/presentation/components/layout/AppShell';
 
 const NotFoundPage = lazy(() =>
@@ -10,6 +10,8 @@ const ExplorePage = lazy(() => import('@/presentation/components/features/explor
 const SeriesPage = lazy(() => import('@/presentation/components/features/series-page').then((module) => ({ default: module.SeriesPage })));
 const MoviesPage = lazy(() => import('@/presentation/components/features/movies-page').then((module) => ({ default: module.MoviesPage })));
 const MyListPage = lazy(() => import('@/presentation/components/features/my-list-page').then((module) => ({ default: module.MyListPage })));
+const MovieDetailPage = lazy(() => import('./movie-detail-page').then((module) => ({ default: module.MovieDetailPage })));
+const SearchPage = lazy(() => import('./search-page').then((module) => ({ default: module.SearchPage })));
 
 function RouteFallback() {
   return <div aria-busy="true" className="p-8"></div>;
