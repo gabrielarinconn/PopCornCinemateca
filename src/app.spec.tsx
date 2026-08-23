@@ -12,6 +12,6 @@ describe('App', () => {
       </AppProviders>,
     );
 
-    expect(screen.getByRole('link', { name: 'Cineteca' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'popCorn - Inicio' })).toBeInTheDocument();
   });
 });
