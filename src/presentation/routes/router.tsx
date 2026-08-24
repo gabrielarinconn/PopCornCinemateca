@@ -2,6 +2,30 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, redirect, type RouteObject } from 'react-router';
 import { AppShell } from '@/presentation/components/layout/AppShell';
 
+const ExplorePage = lazy(() =>
+  import('@/presentation/components/features/explore-page').then((module) => ({
+    default: module.ExplorePage,
+  })),
+);
+
+const SeriesPage = lazy(() =>
+  import('@/presentation/components/features/series-page').then((module) => ({
+    default: module.SeriesPage,
+  })),
+);
+
+const MoviesPage = lazy(() =>
+  import('@/presentation/components/features/movies-page').then((module) => ({
+    default: module.MoviesPage,
+  })),
+);
+
+const MyListPage = lazy(() =>
+  import('@/presentation/components/features/my-list-page').then((module) => ({
+    default: module.MyListPage,
+  })),
+);
+
 const NotFoundPage = lazy(() =>
   import('./not-found-page').then((module) => ({ default: module.NotFoundPage })),
 );
@@ -60,22 +84,6 @@ export const routes: RouteObject[] = [
         element: (
           <Suspense fallback={<RouteFallback />}>
             <ExplorePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'explore/movies',
-        element: (
-          <Suspense fallback={<RouteFallback />}>
-            <SeeAllMoviesPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'explore/series',
-        element: (
-          <Suspense fallback={<RouteFallback />}>
-            <SeeAllSeriesPage />
           </Suspense>
         ),
       },

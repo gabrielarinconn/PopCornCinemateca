@@ -14,7 +14,6 @@ function renderAt(initialPath: string) {
           { path: 'series', element: <div>Contenido de Series</div> },
           { path: 'movies', element: <div>Contenido de Películas</div> },
           { path: 'my-list', element: <div>Contenido de Mi Lista</div> },
-          { path: 'pelicula/:movieId', element: <div>Ficha de película</div> },
         ],
       },
     ],
@@ -30,22 +29,17 @@ describe('AppShell', () => {
     expect(screen.getByRole('navigation', { name: 'Navegación principal' })).toBeInTheDocument();
   });
 
-  it('en rutas normales, muestra la barra de navegación superior', () => {
-    renderAt('/explore');
-    expect(screen.getByRole('banner')).toBeInTheDocument();
-  });
-
-  it('en la ficha de película, oculta la barra de navegación superior', () => {
-    renderAt('/pelicula/550');
-    expect(screen.queryByRole('banner')).not.toBeInTheDocument();
-  });
-
   it('el botón de menú móvil abre la barra lateral', () => {
     renderAt('/explore');
     expect(screen.queryByRole('button', { name: 'Cerrar menú lateral' })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Abrir menú lateral' }));
     expect(screen.getByRole('button', { name: 'Cerrar menú lateral' })).toBeInTheDocument();
+  });
+
+  it('muestra el aviso de atribución de TMDB en el pie de página', () => {
+    renderAt('/explore');
+    expect(screen.getByText(/TMDB/)).toBeInTheDocument();
   });
 
   it.each([
