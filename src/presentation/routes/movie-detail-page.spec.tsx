@@ -101,7 +101,7 @@ describe('Ficha de película', () => {
 
     const heading = await screen.findByRole('heading', { name: 'Fight Club' });
     await waitFor(() => {
-      expect(document.title).toBe('Fight Club — Cineteca');
+      expect(document.title).toBe('Fight Club — popCorn');
     });
     expect(heading).toHaveFocus();
   });
