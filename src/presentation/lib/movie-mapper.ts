@@ -43,6 +43,7 @@ export function toRankedFeatureData(
   options?: { description?: string; simple?: boolean },
 ): RankedFeatureData {
   const rating = ratingValue(movie.rating);
+  const watermark = movie.title.split(' ')[0]?.toUpperCase();
   return {
     id: String(movie.id),
     rank,
@@ -51,7 +52,7 @@ export function toRankedFeatureData(
     meta: formatMeta(movie),
     imageUrl: tmdbPosterUrl(movie.posterPath),
     ...(rating !== undefined && { rating }),
-    watermark: movie.title.split(' ')[0]?.toUpperCase(),
+    ...(watermark !== undefined && { watermark }),
     simple: options?.simple ?? rank > 1,
   };
 }
