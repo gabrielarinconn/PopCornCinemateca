@@ -13,13 +13,13 @@ export default defineConfig({
       reporter: ['text', 'html'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/**/*.spec.{ts,tsx}', 'src/main.tsx', 'src/**/*.d.ts', 'src/test/**'],
-      // Los umbrales se activan en el paso del dominio, cuando ya haya código
-      // propio que cubrir. Encenderlos con el andamio vacío solo enseña a
-      // negociar con el gate.
-      // thresholds: {
-      //   lines: 80, functions: 80, branches: 80, statements: 80,
-      //   'src/domain/**/*.ts': { lines: 100, functions: 100, branches: 100, statements: 100 },
-      // },
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+        'src/domain/**/*.ts': { lines: 100, functions: 100, branches: 100, statements: 100 },
+      },
     },
   },
 });
