@@ -34,7 +34,7 @@ export function Navbar({
         'fixed top-0 right-0 z-sticky h-navbar-height',
         'lg:left-sidebar-width lg:w-[calc(100%-var(--spacing-sidebar-width))]',
         'w-[calc(100%-0px)]',
-        'transition-all duration-300 ease-out-soft'
+        'transition-all duration-300 ease-out-soft',
       )}
       role="banner"
     >
@@ -60,10 +60,7 @@ export function Navbar({
             onBlur={() => {
               setSearchFocused(false);
             }}
-            className={cn(
-              'w-[280px]',
-              searchFocused && 'ring-2 ring-brand'
-            )}
+            className={cn('w-[280px]', searchFocused && 'ring-2 ring-brand')}
           />
 
           <IconButton icon={Bell} aria-label="Notificaciones" size="md" variant="ghost" />

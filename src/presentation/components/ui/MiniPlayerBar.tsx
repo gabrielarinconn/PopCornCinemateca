@@ -26,7 +26,7 @@ export function MiniPlayerBar({
       className={cn(
         'fixed bottom-4 right-4 z-fixed lg:right-8 lg:left-[var(--spacing-sidebar-width)]',
         'bg-background-surface/90 backdrop-blur-md border border-border-subtle rounded-lg shadow-elevated',
-        'p-3 md:p-4'
+        'p-3 md:p-4',
       )}
       role="region"
       aria-label="Mini reproductor"
@@ -40,12 +40,7 @@ export function MiniPlayerBar({
 
       <div className="flex items-center gap-4">
         <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0 rounded-lg overflow-hidden">
-          <img
-            src={thumbnailUrl}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <img src={thumbnailUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
         </div>
 
         <div className="flex-1 min-w-0">

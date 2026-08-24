@@ -1,8 +1,30 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, type RouteObject } from 'react-router';
-import { RootLayout } from '@/presentation/routes/root-layout';
+import { createBrowserRouter, redirect, type RouteObject } from 'react-router';
+import { AppShell } from '@/presentation/components/layout/AppShell';
 
-const HomePage = lazy(() => import('./home-page').then((module) => ({ default: module.HomePage })));
+const ExplorePage = lazy(() =>
+  import('@/presentation/components/features/explore-page').then((module) => ({
+    default: module.ExplorePage,
+  })),
+);
+
+const SeriesPage = lazy(() =>
+  import('@/presentation/components/features/series-page').then((module) => ({
+    default: module.SeriesPage,
+  })),
+);
+
+const MoviesPage = lazy(() =>
+  import('@/presentation/components/features/movies-page').then((module) => ({
+    default: module.MoviesPage,
+  })),
+);
+
+const MyListPage = lazy(() =>
+  import('@/presentation/components/features/my-list-page').then((module) => ({
+    default: module.MyListPage,
+  })),
+);
 
 const NotFoundPage = lazy(() =>
   import('./not-found-page').then((module) => ({ default: module.NotFoundPage })),

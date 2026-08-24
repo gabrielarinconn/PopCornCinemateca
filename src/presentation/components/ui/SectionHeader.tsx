@@ -9,7 +9,13 @@ export interface SectionHeaderProps {
   accentBar?: boolean;
 }
 
-export function SectionHeader({ title, href, linkLabel = 'Ver Todo', icon: Icon, accentBar }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  href,
+  linkLabel = 'Ver Todo',
+  icon: Icon,
+  accentBar,
+}: SectionHeaderProps) {
   return (
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3">

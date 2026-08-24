@@ -6,21 +6,16 @@ export interface PosterCardProps {
   title: string;
   meta: string;
   imageUrl: string;
-  rating?: number;
-  badge?: string;
-  href?: string;
+  rating?: number | undefined;
+  badge?: string | undefined;
+  href?: string | undefined;
 }
 
 export function PosterCard({ title, meta, imageUrl, rating, badge, href }: PosterCardProps) {
   const cardContent = (
     <div className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-background-surface">
       <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
-        <img
-          src={imageUrl}
-          alt=""
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
+        <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
       </div>
 
       {badge && (
@@ -45,7 +40,7 @@ export function PosterCard({ title, meta, imageUrl, rating, badge, href }: Poste
         <button
           type="button"
           className="w-14 h-14 rounded-full bg-brand text-white flex items-center justify-center shadow-elevated scale-95 group-hover:scale-100 transition-transform duration-300"
-          aria-label={"Reproducir " + title}
+          aria-label={'Reproducir ' + title}
         >
           <Play className="w-6 h-6 ml-1" aria-hidden="true" />
         </button>

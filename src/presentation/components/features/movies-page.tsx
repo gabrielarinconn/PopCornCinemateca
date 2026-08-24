@@ -9,7 +9,8 @@ import { mockTop10, mockMasterpieces, mockEmptyPoster } from '@/presentation/dat
 import type { RankedFeatureData } from '@/presentation/data';
 
 export function MoviesPage() {
-  const getRankedFeature = (index: number): RankedFeatureData => mockTop10[index] as unknown as RankedFeatureData;
+  const getRankedFeature = (index: number): RankedFeatureData =>
+    mockTop10[index] as unknown as RankedFeatureData;
 
   return (
     <div className="space-y-10 lg:pt-8 pb-20">

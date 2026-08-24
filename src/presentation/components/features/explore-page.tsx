@@ -1,8 +1,4 @@
-import {
-  SectionHeader,
-  PosterCard,
-  ContinueWatchingCard,
-} from '@/presentation/components/ui';
+import { SectionHeader, PosterCard, ContinueWatchingCard } from '@/presentation/components/ui';
 import { mockTrending, mockContinueWatching } from '@/presentation/data';
 import type { ContinueWatchingData } from '@/presentation/data';
 

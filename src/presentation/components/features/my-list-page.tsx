@@ -18,7 +18,9 @@ export function MyListPage() {
       <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <h1 className="text-4xl font-extrabold tracking-tight text-text-primary">Mi Lista</h1>
-          <p className="text-text-secondary mt-1">Tus películas y series guardadas para ver después.</p>
+          <p className="text-text-secondary mt-1">
+            Tus películas y series guardadas para ver después.
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="secondary" icon={Filter} iconPosition="left" size="sm">

@@ -7,8 +7,10 @@ import { cn } from '@/presentation/lib/cn';
 
 function getSearchPlaceholder(pathname: string): string {
   if (pathname.startsWith('/series')) return 'Buscar series, géneros o directores...';
-  if (pathname.startsWith('/peliculas') || pathname.startsWith('/movies')) return 'Buscar películas...';
-  if (pathname.startsWith('/mi-lista') || pathname.startsWith('/my-list')) return 'Buscar en Mi Lista...';
+  if (pathname.startsWith('/peliculas') || pathname.startsWith('/movies'))
+    return 'Buscar películas...';
+  if (pathname.startsWith('/mi-lista') || pathname.startsWith('/my-list'))
+    return 'Buscar en Mi Lista...';
   return 'Buscar...';
 }
 
@@ -35,7 +37,7 @@ export function AppShell() {
         className={cn(
           'pt-navbar-height min-h-[calc(100vh-4.5rem)]',
           'lg:pl-sidebar-width lg:pr-8 lg:pt-8',
-          'overflow-y-auto'
+          'overflow-y-auto',
         )}
         role="main"
         tabIndex={-1}
