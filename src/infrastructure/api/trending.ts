@@ -14,8 +14,11 @@ export type TrendingResponse = z.infer<typeof TrendingResponseSchema>;
 
 export const getTrendingMovies = async (
   timeWindow: 'day' | 'week' = 'day',
+  signal?: AbortSignal,
 ): Promise<TrendingResponse> => {
-  const { data } = await tmdbClient.get<unknown>(`/trending/movie/${timeWindow}`);
+  const { data } = await tmdbClient.get<unknown>(`/trending/movie/${timeWindow}`, {
+    ...(signal ? { signal } : {}),
+  });
   const parsed = TrendingResponseSchema.safeParse(data);
 
   if (!parsed.success) {

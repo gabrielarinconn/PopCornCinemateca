@@ -12,6 +12,8 @@ const MoviesPage = lazy(() => import('@/presentation/components/features/movies-
 const MyListPage = lazy(() => import('@/presentation/components/features/my-list-page').then((module) => ({ default: module.MyListPage })));
 const MovieDetailPage = lazy(() => import('./movie-detail-page').then((module) => ({ default: module.MovieDetailPage })));
 const SearchPage = lazy(() => import('./search-page').then((module) => ({ default: module.SearchPage })));
+const SeeAllMoviesPage = lazy(() => import('./see-all-movies-page').then((module) => ({ default: module.SeeAllMoviesPage })));
+const SeeAllSeriesPage = lazy(() => import('./see-all-series-page').then((module) => ({ default: module.SeeAllSeriesPage })));
 
 function RouteFallback() {
   return <div aria-busy="true" className="p-8"></div>;
@@ -34,6 +36,22 @@ export const routes: RouteObject[] = [
         element: (
           <Suspense fallback={<RouteFallback />}>
             <ExplorePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'explore/movies',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <SeeAllMoviesPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'explore/series',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <SeeAllSeriesPage />
           </Suspense>
         ),
       },

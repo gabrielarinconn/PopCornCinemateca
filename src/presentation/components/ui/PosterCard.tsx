@@ -67,7 +67,7 @@ export function PosterCard({ title, meta, imageUrl, rating, badge, href }: Poste
 
   if (href) {
     return (
-      <Link to={href} className="block group">
+      <Link to={href} className="block group" aria-label={title}>
         {cardContent}
         {metaContent}
       </Link>
