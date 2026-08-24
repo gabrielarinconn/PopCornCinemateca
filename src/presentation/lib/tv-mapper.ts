@@ -26,12 +26,13 @@ function ratingValue(rating: TvShowSummary['rating']): number | undefined {
 }
 
 export function toTvPosterCardData(show: TvShowSummary): PosterCardData {
+  const rating = ratingValue(show.rating);
   return {
     id: String(show.id),
     title: show.name,
     meta: formatMeta(show),
     imageUrl: tmdbPosterUrl(show.posterPath),
-    rating: ratingValue(show.rating),
+    ...(rating !== undefined && { rating }),
     href: `/serie/${String(show.id)}`,
   };
 }
