@@ -14,8 +14,11 @@ export type RecommendationsResponse = z.infer<typeof RecommendationsResponseSche
 
 export const getMovieRecommendations = async (
   movieId: number,
+  signal?: AbortSignal,
 ): Promise<RecommendationsResponse> => {
-  const { data } = await tmdbClient.get<unknown>(`/movie/${String(movieId)}/recommendations`);
+  const { data } = await tmdbClient.get<unknown>(`/movie/${String(movieId)}/recommendations`, {
+    ...(signal ? { signal } : {}),
+  });
   const parsed = RecommendationsResponseSchema.safeParse(data);
 
   if (!parsed.success) {

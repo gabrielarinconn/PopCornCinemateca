@@ -1,21 +1,29 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, redirect } from 'react-router';
-import { AppShell } from '@/presentation/components/layout/AppShell';
+import { createBrowserRouter, type RouteObject } from 'react-router';
+import { RootLayout } from '@/presentation/routes/root-layout';
+
+const HomePage = lazy(() => import('./home-page').then((module) => ({ default: module.HomePage })));
 
 const NotFoundPage = lazy(() =>
   import('./not-found-page').then((module) => ({ default: module.NotFoundPage })),
 );
 
-const ExplorePage = lazy(() => import('@/presentation/components/features/explore-page').then((module) => ({ default: module.ExplorePage })));
-const SeriesPage = lazy(() => import('@/presentation/components/features/series-page').then((module) => ({ default: module.SeriesPage })));
-const MoviesPage = lazy(() => import('@/presentation/components/features/movies-page').then((module) => ({ default: module.MoviesPage })));
-const MyListPage = lazy(() => import('@/presentation/components/features/my-list-page').then((module) => ({ default: module.MyListPage })));
+const MovieDetailPage = lazy(() =>
+  import('./movie-detail-page').then((module) => ({ default: module.MovieDetailPage })),
+);
+
+const SearchPage = lazy(() =>
+  import('./search-page').then((module) => ({ default: module.SearchPage })),
+);
 
 function RouteFallback() {
   return <div aria-busy="true" className="p-8"></div>;
 }
 
-export const router = createBrowserRouter([
+// Se exporta separado de `router` para que las pruebas puedan armar un
+// router de memoria con la misma configuración y simular una URL abierta
+// directamente (recarga dura), no solo una navegación interna.
+export const routes: RouteObject[] = [
   {
     path: '/',
     element: <AppShell />,
@@ -57,6 +65,22 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'pelicula/:movieId',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <MovieDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'buscar',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
         path: '*',
         element: (
           <Suspense fallback={<RouteFallback />}>
@@ -66,4 +90,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+
+export const router = createBrowserRouter(routes);

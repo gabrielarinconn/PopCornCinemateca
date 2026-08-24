@@ -1,6 +1,5 @@
-import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
 
 import {
   DomainNotFoundError,
@@ -10,18 +9,11 @@ import {
 
 import { getMovieDetails } from '../infrastructure/api/movie';
 import { getGenres } from '../infrastructure/api/genres';
+import { server } from './msw/server';
 
-const server = setupServer();
-
-beforeAll(() => {
-  server.listen();
-});
-afterEach(() => {
-  server.resetHandlers();
-});
-afterAll(() => {
-  server.close();
-});
+// Servidor MSW global (arrancado en vitest.setup.ts) — crear otro
+// setupServer() local aquí duplicaba de verdad cada petición: dos capas de
+// interceptores activas a la vez, no solo un doble conteo del espía.
 
 describe('Contrato de Infraestructura TMDB', () => {
   it('debe traducir el código de error 34 de TMDB a DomainNotFoundError', async () => {
@@ -84,6 +76,8 @@ describe('Contrato de Infraestructura TMDB', () => {
           poster_path: '/path.jpg',
           backdrop_path: '/back.jpg',
           vote_average: 8.4,
+          vote_count: 26000,
+          budget: 63000000,
           genres: [{ id: 18, name: 'Drama' }],
           credits: { cast: [] },
           videos: { results: [] },
@@ -94,6 +88,6 @@ describe('Contrato de Infraestructura TMDB', () => {
     const movie = await getMovieDetails(550);
 
     expect(movie.title).toBe('Fight Club');
-    expect(appendParamValue).toBe('credits,videos');
+    expect(appendParamValue).toBe('credits,videos,translations');
   });
 });
