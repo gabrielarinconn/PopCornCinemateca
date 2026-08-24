@@ -6,9 +6,9 @@ export interface PosterCardProps {
   title: string;
   meta: string;
   imageUrl: string;
-  rating?: number;
-  badge?: string;
-  href?: string;
+  rating?: number | undefined;
+  badge?: string | undefined;
+  href?: string | undefined;
 }
 
 export function PosterCard({ title, meta, imageUrl, rating, badge, href }: PosterCardProps) {
