@@ -29,7 +29,7 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
             'bg-background border border-border-subtle',
             'text-text-secondary hover:text-text-primary',
             'transition-colors duration-200',
-            'lg:hidden'
+            'lg:hidden',
           )}
           onClick={() => {
             onClose();
@@ -46,7 +46,7 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
           'bg-background border-r border-border-subtle',
           'flex flex-col',
           'transform transition-transform duration-300 ease-out-soft lg:translate-x-0',
-          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
         )}
         aria-label="Navegación principal"
         role="navigation"

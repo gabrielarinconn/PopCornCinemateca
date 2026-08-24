@@ -12,7 +12,7 @@ export function Badge({ variant = 'default', className, children, ...props }: Ba
         'transition-colors duration-200',
         variant === 'default' && 'bg-white/[0.08] text-text-secondary',
         variant === 'outline' && 'border border-border-subtle bg-transparent text-text-secondary',
-        className
+        className,
       )}
       {...props}
     >

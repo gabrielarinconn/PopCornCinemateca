@@ -12,7 +12,15 @@ export interface ContinueWatchingCardProps {
   href?: string;
 }
 
-export function ContinueWatchingCard({ title, subtitle, progress, timeRemaining, imageUrl, size = 'lg', href }: ContinueWatchingCardProps) {
+export function ContinueWatchingCard({
+  title,
+  subtitle,
+  progress,
+  timeRemaining,
+  imageUrl,
+  size = 'lg',
+  href,
+}: ContinueWatchingCardProps) {
   const isLarge = size === 'lg';
 
   const cardContent = (
@@ -34,7 +42,7 @@ export function ContinueWatchingCard({ title, subtitle, progress, timeRemaining,
         <button
           type="button"
           className="w-14 h-14 rounded-full bg-brand text-white flex items-center justify-center shadow-elevated scale-95 group-hover:scale-100 transition-transform duration-300"
-          aria-label={"Continuar viendo " + title}
+          aria-label={'Continuar viendo ' + title}
         >
           <Play className="w-6 h-6 ml-1" aria-hidden="true" />
         </button>
@@ -48,7 +56,7 @@ export function ContinueWatchingCard({ title, subtitle, progress, timeRemaining,
           aria-valuenow={progress}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label={"Progreso de " + title + ": " + String(progress) + "%"}
+          aria-label={'Progreso de ' + title + ': ' + String(progress) + '%'}
         />
       </div>
 
@@ -77,9 +85,5 @@ export function ContinueWatchingCard({ title, subtitle, progress, timeRemaining,
     );
   }
 
-  return (
-    <div className="w-full aspect-video">
-      {cardContent}
-    </div>
-  );
+  return <div className="w-full aspect-video">{cardContent}</div>;
 }

@@ -19,7 +19,7 @@ export function NavItem({ icon: Icon, label, to, isActive }: NavItemProps) {
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background',
           active
             ? 'bg-brand-subtle text-text-primary'
-            : 'text-text-secondary hover:bg-white/[0.04] hover:text-text-primary'
+            : 'text-text-secondary hover:bg-white/[0.04] hover:text-text-primary',
         )
       }
       aria-current={isActive ? 'page' : undefined}
@@ -28,7 +28,7 @@ export function NavItem({ icon: Icon, label, to, isActive }: NavItemProps) {
         className={cn(
           'w-5 h-5 flex-shrink-0',
           'transition-colors duration-200',
-          isActive ? 'text-brand' : 'text-text-secondary'
+          isActive ? 'text-brand' : 'text-text-secondary',
         )}
         aria-hidden="true"
       />

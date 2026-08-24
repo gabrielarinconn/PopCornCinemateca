@@ -21,7 +21,7 @@ export function FilterPillGroup({ options, active, onChange }: FilterPillGroupPr
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             active === option
               ? 'bg-brand text-white shadow-[0_4px_14px_rgba(139,92,246,0.4)]'
-              : 'bg-background-surface text-text-secondary hover:bg-background-surface hover:text-text-primary hover:border-border-subtle border border-transparent'
+              : 'bg-background-surface text-text-secondary hover:bg-background-surface hover:text-text-primary hover:border-border-subtle border border-transparent',
           )}
           aria-pressed={active === option}
         >
