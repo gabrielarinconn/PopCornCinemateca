@@ -30,37 +30,12 @@ const NotFoundPage = lazy(() =>
   import('./not-found-page').then((module) => ({ default: module.NotFoundPage })),
 );
 
-const ExplorePage = lazy(() =>
-  import('@/presentation/components/features/explore-page').then((module) => ({
-    default: module.ExplorePage,
-  })),
-);
-const SeriesPage = lazy(() =>
-  import('@/presentation/components/features/series-page').then((module) => ({
-    default: module.SeriesPage,
-  })),
-);
-const MoviesPage = lazy(() =>
-  import('@/presentation/components/features/movies-page').then((module) => ({
-    default: module.MoviesPage,
-  })),
-);
-const MyListPage = lazy(() =>
-  import('@/presentation/components/features/my-list-page').then((module) => ({
-    default: module.MyListPage,
-  })),
-);
 const MovieDetailPage = lazy(() =>
   import('./movie-detail-page').then((module) => ({ default: module.MovieDetailPage })),
 );
+
 const SearchPage = lazy(() =>
   import('./search-page').then((module) => ({ default: module.SearchPage })),
-);
-const SeeAllMoviesPage = lazy(() =>
-  import('./see-all-movies-page').then((module) => ({ default: module.SeeAllMoviesPage })),
-);
-const SeeAllSeriesPage = lazy(() =>
-  import('./see-all-series-page').then((module) => ({ default: module.SeeAllSeriesPage })),
 );
 
 function RouteFallback() {
