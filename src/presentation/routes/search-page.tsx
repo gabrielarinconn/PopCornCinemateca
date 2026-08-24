@@ -28,12 +28,19 @@ export function SearchPage() {
 
   return (
     <PageContainer className="space-y-8 pb-32">
-      <h1 ref={headingRef} tabIndex={-1} className="text-3xl font-extrabold tracking-tight text-text-primary">
+      <h1
+        ref={headingRef}
+        tabIndex={-1}
+        className="text-3xl font-extrabold tracking-tight text-text-primary"
+      >
         {siteCopy.search.heading}
       </h1>
 
       <div className="relative max-w-xl">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" aria-hidden="true" />
+        <Search
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted"
+          aria-hidden="true"
+        />
         <label htmlFor="search-query" className="sr-only">
           {siteCopy.search.inputLabel}
         </label>

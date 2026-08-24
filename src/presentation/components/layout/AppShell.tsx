@@ -6,8 +6,10 @@ import { cn } from '@/presentation/lib/cn';
 
 function getSearchPlaceholder(pathname: string): string {
   if (pathname.startsWith('/series')) return 'Buscar series, géneros o directores...';
-  if (pathname.startsWith('/peliculas') || pathname.startsWith('/movies')) return 'Buscar películas...';
-  if (pathname.startsWith('/mi-lista') || pathname.startsWith('/my-list')) return 'Buscar en Mi Lista...';
+  if (pathname.startsWith('/peliculas') || pathname.startsWith('/movies'))
+    return 'Buscar películas...';
+  if (pathname.startsWith('/mi-lista') || pathname.startsWith('/my-list'))
+    return 'Buscar en Mi Lista...';
   return 'Buscar...';
 }
 
@@ -28,7 +30,9 @@ export function AppShell() {
     <div className="min-h-screen bg-background text-text-primary">
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
-      {!isDetailPage && <Navbar onMenuClick={toggleSidebar} searchPlaceholder={searchPlaceholder} />}
+      {!isDetailPage && (
+        <Navbar onMenuClick={toggleSidebar} searchPlaceholder={searchPlaceholder} />
+      )}
 
       <main
         id="main-content"
@@ -36,15 +40,13 @@ export function AppShell() {
           isDetailPage
             ? 'min-h-screen lg:pl-sidebar-width'
             : 'pt-[var(--spacing-navbar-height)] min-h-[calc(100vh-var(--spacing-navbar-height))] lg:pl-sidebar-width lg:pr-8',
-          'overflow-y-auto'
+          'overflow-y-auto',
         )}
         role="main"
         tabIndex={-1}
       >
         <Outlet />
       </main>
-
-
     </div>
   );
 }

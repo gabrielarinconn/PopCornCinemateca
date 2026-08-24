@@ -30,9 +30,7 @@ export function SidebarUserProfile({ name, avatarUrl, isPremium }: SidebarUserPr
           </Badge>
         )}
       </div>
-      {!hasUser && (
-        <User className="w-5 h-5 text-text-muted" aria-hidden="true" />
-      )}
+      {!hasUser && <User className="w-5 h-5 text-text-muted" aria-hidden="true" />}
     </div>
   );
 }

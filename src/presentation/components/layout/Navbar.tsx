@@ -41,7 +41,7 @@ export function Navbar({
         'lg:left-[var(--spacing-sidebar-width)] lg:w-[calc(100%-var(--spacing-sidebar-width))]',
         'w-full',
         'transition-all duration-300 ease-[var(--ease-out-soft)]',
-        isHidden && '-translate-y-full'
+        isHidden && '-translate-y-full',
       )}
       role="banner"
     >
@@ -76,10 +76,7 @@ export function Navbar({
                 }
               }
             }}
-            className={cn(
-              'w-[280px]',
-              searchFocused && 'ring-2 ring-brand'
-            )}
+            className={cn('w-[280px]', searchFocused && 'ring-2 ring-brand')}
           />
 
           <IconButton icon={Bell} aria-label="Notificaciones" size="md" variant="ghost" />

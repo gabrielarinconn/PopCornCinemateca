@@ -1,7 +1,5 @@
 import { Bookmark } from 'lucide-react';
-import {
-  PosterCard,
-} from '@/presentation/components/ui';
+import { PosterCard } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useLibraryMovies } from '@/presentation/hooks/use-library-movies';
 import { useRemoveMovie } from '@/presentation/hooks/use-remove-movie';
@@ -39,7 +37,11 @@ export function MyListPage() {
             <div key={movie.id} className="relative group">
               <PosterCard
                 title={movie.title}
-                meta={new Date(movie.savedAt).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })}
+                meta={new Date(movie.savedAt).toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
                 imageUrl={tmdbPosterUrl(movie.posterPath)}
                 href={`/pelicula/${String(movie.id)}`}
               />

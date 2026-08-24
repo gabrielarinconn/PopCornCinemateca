@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { TrendingUp } from 'lucide-react';
-import {
-  SectionHeader,
-  PosterCard,
-  FilterPillGroup,
-} from '@/presentation/components/ui';
+import { SectionHeader, PosterCard, FilterPillGroup } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useTrendingTv } from '@/presentation/hooks/use-trending-tv';
 import { useDiscoverTv } from '@/presentation/hooks/use-discover-tv';
@@ -22,7 +18,9 @@ export function SeriesPage() {
     isFetchingNextPage,
   } = useDiscoverTv({ sortBy: 'popularity.desc' });
 
-  const popularShows = (popularTv?.pages ?? []).flatMap((page) => page.shows).map(toTvPosterCardData);
+  const popularShows = (popularTv?.pages ?? [])
+    .flatMap((page) => page.shows)
+    .map(toTvPosterCardData);
 
   return (
     <PageContainer className="space-y-10">
@@ -33,11 +31,7 @@ export function SeriesPage() {
         </p>
       </header>
 
-      <FilterPillGroup
-        options={SERIES_FILTERS}
-        active={activeFilter}
-        onChange={setActiveFilter}
-      />
+      <FilterPillGroup options={SERIES_FILTERS} active={activeFilter} onChange={setActiveFilter} />
 
       <SectionHeader title="Tendencias de la Semana" icon={TrendingUp} />
 

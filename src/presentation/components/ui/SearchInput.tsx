@@ -10,7 +10,10 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ placeholder = 'Search...', className, ...props }, ref) => {
     return (
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted pointer-events-none" aria-hidden="true" />
+        <Search
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted pointer-events-none"
+          aria-hidden="true"
+        />
         <input
           ref={ref}
           type="search"
@@ -23,13 +26,13 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             'focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent',
             'transition-colors duration-200',
             'disabled:opacity-50 disabled:pointer-events-none',
-            className
+            className,
           )}
           {...props}
         />
       </div>
     );
-  }
+  },
 );
 
 SearchInput.displayName = 'SearchInput';

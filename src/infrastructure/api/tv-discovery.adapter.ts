@@ -1,7 +1,4 @@
-import type {
-  DiscoverTvFilters,
-  TvDiscoveryPort,
-} from '@/application/ports/tv-discovery.port';
+import type { DiscoverTvFilters, TvDiscoveryPort } from '@/application/ports/tv-discovery.port';
 import { getDiscoverTv } from './discover-tv';
 import { toTvShowSummary } from './tv-summary.mapper';
 

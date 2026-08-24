@@ -5,24 +5,24 @@
 
   /* --- Color Palette (Dark Cinematic Premium) --- */
   /* Background layers - Sidebar uses SAME black as app background */
-  --color-background: #0A0A0A;
-  --color-background-elevated: #0A0A0A;
-  --color-background-surface: #1A1A22;
+  --color-background: #0a0a0a;
+  --color-background-elevated: #0a0a0a;
+  --color-background-surface: #1a1a22;
 
   /* Borders */
-  --color-border-subtle: rgba(255,255,255,0.06);
-  --color-border-default: rgba(255,255,255,0.10);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-default: rgba(255, 255, 255, 0.1);
 
   /* Brand (Violet) */
-  --color-brand: #8B5CF6;
-  --color-brand-hover: #7C3AED;
-  --color-brand-subtle: rgba(139,92,246,0.18);
+  --color-brand: #8b5cf6;
+  --color-brand-hover: #7c3aed;
+  --color-brand-subtle: rgba(139, 92, 246, 0.18);
 
   /* Text */
-  --color-text-primary: #F5F5F7;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #6B6B76;
-  --color-text-lavender: #B8A9E8;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #6b6b76;
+  --color-text-lavender: #b8a9e8;
 
   /* Legacy tokens (kept for compatibility) */
   --color-surface: oklch(0.19 0.015 295);
@@ -52,7 +52,7 @@
 
   /* --- Radius --- */
   --radius-card: 0.75rem; /* 12px - rounded-lg */
-  --radius-pill: 999px;   /* rounded-full */
+  --radius-pill: 999px; /* rounded-full */
 
   /* --- Shadows --- */
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.45);

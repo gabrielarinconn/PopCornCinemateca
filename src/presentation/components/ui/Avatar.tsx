@@ -34,17 +34,12 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           'bg-background-surface border border-border-subtle',
           'ring-1 ring-inset ring-border-subtle',
           sizeClasses[size],
-          className
+          className,
         )}
         {...props}
       >
         {src ? (
-          <img
-            src={src}
-            alt={alt ?? ''}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <img src={src} alt={alt ?? ''} className="w-full h-full object-cover" loading="lazy" />
         ) : (
           <span className="font-medium text-text-primary" aria-hidden="true">
             {initials}
@@ -52,7 +47,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Avatar.displayName = 'Avatar';

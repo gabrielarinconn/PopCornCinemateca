@@ -1,14 +1,17 @@
 import { useNavigate } from 'react-router';
 import { Play, Star } from 'lucide-react';
-import {
-  SectionHeader,
-  PosterCard,
-} from '@/presentation/components/ui';
+import { SectionHeader, PosterCard } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useTrendingMovies } from '@/presentation/hooks/use-trending-movies';
 import { useTrendingTv } from '@/presentation/hooks/use-trending-tv';
 
-function FeaturedCard({ title, subtitle, rating, imageUrl, onClick }: {
+function FeaturedCard({
+  title,
+  subtitle,
+  rating,
+  imageUrl,
+  onClick,
+}: {
   title: string;
   subtitle: string;
   rating?: number;
@@ -81,10 +84,7 @@ export function ExplorePage() {
         </>
       )}
 
-      <SectionHeader
-        title="Películas Populares"
-        href="/movies"
-      />
+      <SectionHeader title="Películas Populares" href="/movies" />
 
       {trendingMoviesLoading ? (
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-3" aria-busy="true">
@@ -122,10 +122,7 @@ export function ExplorePage() {
         </>
       )}
 
-      <SectionHeader
-        title="Series Populares"
-        href="/series"
-      />
+      <SectionHeader title="Series Populares" href="/series" />
 
       {trendingTvLoading ? (
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-3" aria-busy="true">

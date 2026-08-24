@@ -236,11 +236,7 @@ function MovieDetailContent({ movieId }: { movieId: number }) {
               {movie.trailers
                 .filter((trailer) => trailer.site === 'YouTube')
                 .map((trailer) => (
-                  <TrailerEmbed
-                    key={trailer.id}
-                    videoKey={trailer.key}
-                    title={trailer.name}
-                  />
+                  <TrailerEmbed key={trailer.id} videoKey={trailer.key} title={trailer.name} />
                 ))}
             </div>
           </section>

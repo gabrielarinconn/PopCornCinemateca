@@ -22,12 +22,24 @@ const iconSizeClasses = {
 };
 
 const variantClasses = {
-  default: 'bg-background-surface/50 border border-border-subtle hover:bg-background-surface transition-colors duration-200',
+  default:
+    'bg-background-surface/50 border border-border-subtle hover:bg-background-surface transition-colors duration-200',
   ghost: 'bg-transparent border-none hover:bg-white/[0.06] transition-colors duration-200',
 };
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ icon: Icon, size = 'md', variant = 'default', className, 'aria-label': ariaLabel, children, ...props }, ref) => {
+  (
+    {
+      icon: Icon,
+      size = 'md',
+      variant = 'default',
+      className,
+      'aria-label': ariaLabel,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <button
         ref={ref}
@@ -38,7 +50,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           'disabled:opacity-50 disabled:pointer-events-none',
           sizeClasses[size],
           variantClasses[variant],
-          className
+          className,
         )}
         aria-label={ariaLabel}
         {...props}
@@ -47,7 +59,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 IconButton.displayName = 'IconButton';

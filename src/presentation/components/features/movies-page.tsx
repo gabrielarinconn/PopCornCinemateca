@@ -1,7 +1,4 @@
-import {
-  SectionHeader,
-  PosterCard,
-} from '@/presentation/components/ui';
+import { SectionHeader, PosterCard } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useTrendingMovies } from '@/presentation/hooks/use-trending-movies';
 import { useDiscoverMovies } from '@/presentation/hooks/use-discover-movies';
