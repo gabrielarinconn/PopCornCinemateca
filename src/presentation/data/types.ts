@@ -3,9 +3,9 @@ export interface PosterCardData {
   title: string;
   meta: string;
   imageUrl: string;
-  rating?: number;
-  badge?: string;
-  href?: string;
+  rating?: number | undefined;
+  badge?: string | undefined;
+  href?: string | undefined;
 }
 
 export interface FeaturedBannerData {
@@ -13,9 +13,9 @@ export interface FeaturedBannerData {
   title: string;
   description: string;
   imageUrl: string;
-  badge?: string;
-  rating?: number;
-  watermark?: string;
+  badge?: string | undefined;
+  rating?: number | undefined;
+  watermark?: string | undefined;
 }
 
 export interface ContinueWatchingData {
@@ -25,20 +25,20 @@ export interface ContinueWatchingData {
   progress: number;
   timeRemaining: string;
   imageUrl: string;
-  href?: string;
+  href?: string | undefined;
 }
 
 export interface RankedFeatureData {
   id: string;
   rank: number;
   title: string;
-  description?: string;
-  meta?: string;
+  description?: string | undefined;
+  meta?: string | undefined;
   imageUrl: string;
-  badge?: string;
-  rating?: number;
-  watermark?: string;
-  simple?: boolean;
+  badge?: string | undefined;
+  rating?: number | undefined;
+  watermark?: string | undefined;
+  simple?: boolean | undefined;
 }
 
 export interface SeriesFilterOption {

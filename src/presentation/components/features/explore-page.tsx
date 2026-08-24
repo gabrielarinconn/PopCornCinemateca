@@ -14,7 +14,7 @@ function FeaturedCard({
 }: {
   title: string;
   subtitle: string;
-  rating?: number;
+  rating?: number | undefined;
   imageUrl: string;
   onClick: () => void;
 }) {
