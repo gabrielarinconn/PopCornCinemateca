@@ -26,7 +26,7 @@ export type TrendingTvResponse = z.infer<typeof TrendingTvResponseSchema>;
 export const getTrendingTv = async (
   timeWindow: 'day' | 'week' = 'week',
   signal?: AbortSignal,
-): Promise<TrendingResponse> => {
+): Promise<TrendingTvResponse> => {
   const { data } = await tmdbClient.get<unknown>(`/trending/tv/${timeWindow}`, {
     ...(signal ? { signal } : {}),
   });

@@ -77,7 +77,9 @@ export function ExplorePage() {
                 subtitle={movie.meta}
                 rating={movie.rating}
                 imageUrl={movie.imageUrl}
-                onClick={() => navigate(`/pelicula/${movie.id}`)}
+                onClick={() => {
+                  void navigate(`/pelicula/${movie.id}`);
+                }}
               />
             ))}
           </div>
@@ -115,7 +117,9 @@ export function ExplorePage() {
                 subtitle={show.meta}
                 rating={show.rating}
                 imageUrl={show.imageUrl}
-                onClick={() => navigate(`/serie/${show.id}`)}
+                onClick={() => {
+                  void navigate(`/serie/${show.id}`);
+                }}
               />
             ))}
           </div>

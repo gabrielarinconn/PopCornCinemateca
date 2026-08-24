@@ -92,7 +92,9 @@ function MovieDetailContent({ movieId }: { movieId: number }) {
 
         <button
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => {
+            void navigate('/');
+          }}
           className="absolute top-4 right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-background/60 backdrop-blur-sm text-text-primary text-sm font-medium hover:bg-brand hover:text-white transition-colors"
           aria-label="Volver al inicio"
         >

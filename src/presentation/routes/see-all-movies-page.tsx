@@ -18,7 +18,9 @@ export function SeeAllMoviesPage() {
       <div className="flex items-center gap-4">
         <button
           type="button"
-          onClick={() => navigate('/explore')}
+          onClick={() => {
+            void navigate('/explore');
+          }}
           className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />

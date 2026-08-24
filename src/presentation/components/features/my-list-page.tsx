@@ -47,7 +47,9 @@ export function MyListPage() {
               />
               <button
                 type="button"
-                onClick={() => removeMovie.mutate(movie.id)}
+                onClick={() => {
+                  removeMovie.mutate(movie.id);
+                }}
                 className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-danger/80 text-white flex items-center justify-center text-sm font-bold hover:bg-danger transition-colors opacity-0 group-hover:opacity-100"
                 aria-label={`Eliminar ${movie.title}`}
               >
