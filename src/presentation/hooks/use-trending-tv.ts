@@ -15,13 +15,16 @@ export function useTrendingTv(timeWindow: 'day' | 'week' = 'week', limit = 20) {
     staleTime: TRENDING_TV_STALE_TIME_MS,
     retry: shouldRetryQuery,
     select: (data): PosterCardData[] =>
-      data.results.slice(0, limit).map((show) => ({
-        id: String(show.id),
-        title: show.name,
-        meta: show.first_air_date ? show.first_air_date.slice(0, 4) : '',
-        imageUrl: tmdbPosterUrl(show.poster_path),
-        rating: show.vote_count > 0 ? show.vote_average : undefined,
-        href: `/serie/${String(show.id)}`,
-      })),
+      data.results.slice(0, limit).map((show) => {
+        const rating = show.vote_count > 0 ? show.vote_average : undefined;
+        return {
+          id: String(show.id),
+          title: show.name,
+          meta: show.first_air_date ? show.first_air_date.slice(0, 4) : '',
+          imageUrl: tmdbPosterUrl(show.poster_path),
+          ...(rating !== undefined && { rating }),
+          href: `/serie/${String(show.id)}`,
+        };
+      }),
   });
 }
