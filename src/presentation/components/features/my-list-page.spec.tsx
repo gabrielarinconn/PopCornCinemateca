@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { SavedMovie } from '@/application/ports/library-storage.port';
 import { libraryStoragePort } from '@/infrastructure/storage/library-storage.adapter';
 import { libraryQueryKey } from '@/presentation/hooks/use-library-movies';
+import { expectNoA11yViolations } from '@/test/axe';
 import { MyListPage } from './my-list-page';
 
 const movie: SavedMovie = {
@@ -23,8 +24,8 @@ function renderWithLibrary(initialLibrary: SavedMovie[]) {
       <MemoryRouter>{children}</MemoryRouter>
     </QueryClientProvider>
   );
-  render(<MyListPage />, { wrapper: Wrapper });
-  return queryClient;
+  const { container } = render(<MyListPage />, { wrapper: Wrapper });
+  return { queryClient, container };
 }
 
 describe('MyListPage', () => {
@@ -56,5 +57,10 @@ describe('MyListPage', () => {
     await waitFor(() => {
       expect(screen.getByText('Tu lista está vacía')).toBeInTheDocument();
     });
+  });
+
+  it('no tiene violaciones de accesibilidad críticas o serias', async () => {
+    const { container } = renderWithLibrary([movie]);
+    await expectNoA11yViolations(container);
   });
 });

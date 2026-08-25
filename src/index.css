@@ -54,6 +54,11 @@
   --radius-card: 0.75rem; /* 12px - rounded-lg */
   --radius-pill: 999px; /* rounded-full */
 
+  /* --- Aspect ratios --- */
+  /* El póster reserva este espacio antes de cargar la imagen — sin esto,
+     el layout salta cuando la imagen termina de bajar. */
+  --aspect-poster: 2 / 3;
+
   /* --- Shadows --- */
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.45);
   --shadow-elevated: 0 20px 60px -20px rgba(0, 0, 0, 0.6);

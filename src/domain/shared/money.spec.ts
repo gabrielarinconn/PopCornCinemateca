@@ -28,4 +28,11 @@ describe('formatMoney', () => {
     const money = createMoney(150_00, 'USD');
     expect(formatMoney(money, 'en-US')).toBe('$150.00');
   });
+
+  it('formatea en dólares con locale de-DE — mismo dato, símbolo y separador distintos', () => {
+    const money = createMoney(150_00, 'USD');
+    // El espacio antes del símbolo es un espacio de no separación (U+00A0),
+    // no uno normal — así es como Intl lo formatea en de-DE.
+    expect(formatMoney(money, 'de-DE')).toBe('150,00 $');
+  });
 });

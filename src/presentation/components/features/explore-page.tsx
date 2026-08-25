@@ -93,7 +93,7 @@ export function ExplorePage() {
           {Array.from({ length: 17 }).map((_, i) => (
             <div
               key={`skeleton-movies-${String(i)}`}
-              className="aspect-[2/3] rounded-lg bg-background-surface animate-pulse"
+              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
             />
           ))}
         </div>
@@ -133,7 +133,7 @@ export function ExplorePage() {
           {Array.from({ length: 17 }).map((_, i) => (
             <div
               key={`skeleton-series-${String(i)}`}
-              className="aspect-[2/3] rounded-lg bg-background-surface animate-pulse"
+              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
             />
           ))}
         </div>
