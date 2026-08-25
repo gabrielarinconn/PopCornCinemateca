@@ -35,7 +35,7 @@ export function AppShell() {
       <main
         id="main-content"
         className={cn(
-          'pt-navbar-height min-h-[calc(100vh-4.5rem)]',
+          'pt-navbar-height pb-footer-height min-h-[calc(100vh-4.5rem)]',
           'lg:pl-sidebar-width lg:pr-8 lg:pt-8',
           'overflow-y-auto',
         )}

@@ -4,23 +4,29 @@ import { SectionHeader, PosterCard, FilterPillGroup } from '@/presentation/compo
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useTrendingTv } from '@/presentation/hooks/use-trending-tv';
 import { useDiscoverTv } from '@/presentation/hooks/use-discover-tv';
+import { useGenres } from '@/presentation/hooks/use-genres';
 import { toTvPosterCardData } from '@/presentation/lib/tv-mapper';
 
-const SERIES_FILTERS = ['All', 'Drama', 'Sci-Fi', 'Acción', 'Comedia'];
+const ALL_GENRES_LABEL = 'Todos';
 
 export function SeriesPage() {
-  const [activeFilter, setActiveFilter] = useState('All');
   const { data: trendingTv, isLoading } = useTrendingTv('week', 20);
+  const { data: genres } = useGenres('tv');
+  const [activeGenre, setActiveGenre] = useState(ALL_GENRES_LABEL);
+
+  const selectedGenreId = genres?.find((genre) => genre.name === activeGenre)?.id;
+
   const {
     data: popularTv,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useDiscoverTv({ sortBy: 'popularity.desc' });
+  } = useDiscoverTv({ sortBy: 'popularity.desc', genreId: selectedGenreId });
 
   const popularShows = (popularTv?.pages ?? [])
     .flatMap((page) => page.shows)
     .map(toTvPosterCardData);
+  const genreFilterOptions = [ALL_GENRES_LABEL, ...(genres ?? []).map((genre) => genre.name)];
 
   return (
     <PageContainer className="space-y-10">
@@ -31,30 +37,17 @@ export function SeriesPage() {
         </p>
       </header>
 
-      <FilterPillGroup options={SERIES_FILTERS} active={activeFilter} onChange={setActiveFilter} />
-
-      <SectionHeader title="Tendencias de la Semana" icon={TrendingUp} />
-
-      {isLoading ? (
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3" aria-busy="true">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={`skeleton-trending-${String(i)}`}
-              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
-          {(trendingTv ?? []).map((show) => (
-            <PosterCard key={show.id} {...show} />
-          ))}
-        </div>
-      )}
+      <FilterPillGroup
+        options={genreFilterOptions}
+        active={activeGenre}
+        onChange={setActiveGenre}
+      />
 
       {popularShows.length > 0 && (
         <>
-          <SectionHeader title="Series Populares" />
+          <SectionHeader
+            title={activeGenre === ALL_GENRES_LABEL ? 'Series Populares' : `Género: ${activeGenre}`}
+          />
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
             {popularShows.map((show) => (
               <PosterCard key={show.id} {...show} />
@@ -73,6 +66,25 @@ export function SeriesPage() {
             </div>
           )}
         </>
+      )}
+
+      <SectionHeader title="Tendencias de la Semana" icon={TrendingUp} />
+
+      {isLoading ? (
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3" aria-busy="true">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={`skeleton-trending-${String(i)}`}
+              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
+          {(trendingTv ?? []).map((show) => (
+            <PosterCard key={show.id} {...show} />
+          ))}
+        </div>
       )}
     </PageContainer>
   );
