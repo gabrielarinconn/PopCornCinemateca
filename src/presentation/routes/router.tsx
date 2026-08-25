@@ -46,6 +46,22 @@ const SeeAllSeriesPage = lazy(() =>
   import('./see-all-series-page').then((module) => ({ default: module.SeeAllSeriesPage })),
 );
 
+const ListsPage = lazy(() =>
+  import('./lists-page').then((module) => ({ default: module.ListsPage })),
+);
+
+const NewListPage = lazy(() =>
+  import('./new-list-page').then((module) => ({ default: module.NewListPage })),
+);
+
+const ListDetailPage = lazy(() =>
+  import('./list-detail-page').then((module) => ({ default: module.ListDetailPage })),
+);
+
+const EditListPage = lazy(() =>
+  import('./edit-list-page').then((module) => ({ default: module.EditListPage })),
+);
+
 function RouteFallback() {
   return <div aria-busy="true" className="p-8"></div>;
 }
@@ -107,6 +123,38 @@ export const routes: RouteObject[] = [
         element: (
           <Suspense fallback={<RouteFallback />}>
             <MyListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'listas',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <ListsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'listas/nueva',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <NewListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'listas/:listId',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <ListDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'listas/:listId/editar',
+        element: (
+          <Suspense fallback={<RouteFallback />}>
+            <EditListPage />
           </Suspense>
         ),
       },
