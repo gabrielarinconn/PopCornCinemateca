@@ -1,4 +1,5 @@
 import { Bookmark } from 'lucide-react';
+import { Link } from 'react-router';
 import { PosterCard } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useLibraryMovies } from '@/presentation/hooks/use-library-movies';
@@ -13,13 +14,21 @@ export function MyListPage() {
 
   return (
     <PageContainer className="space-y-10">
-      <header>
-        <h1 className="text-4xl font-extrabold tracking-tight text-text-lavender">Mi Lista</h1>
-        <p className="text-text-secondary mt-1">
-          {movies.length > 0
-            ? `${String(movies.length)} ${movies.length === 1 ? 'película guardada' : 'películas guardadas'}.`
-            : 'Tus películas y series guardadas para ver después.'}
-        </p>
+      <header className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-extrabold tracking-tight text-text-lavender">Mi Lista</h1>
+          <p className="text-text-secondary mt-1">
+            {movies.length > 0
+              ? `${String(movies.length)} ${movies.length === 1 ? 'película guardada' : 'películas guardadas'}.`
+              : 'Tus películas y series guardadas para ver después.'}
+          </p>
+        </div>
+        <Link
+          to="/listas"
+          className="text-sm font-medium text-brand hover:text-brand-hover transition-colors whitespace-nowrap"
+        >
+          Mis listas temáticas
+        </Link>
       </header>
 
       {isLoading ? (
