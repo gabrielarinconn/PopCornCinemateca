@@ -15,13 +15,16 @@ export function useTrendingMovies(timeWindow: 'day' | 'week' = 'week', limit = 2
     staleTime: TRENDING_STALE_TIME_MS,
     retry: shouldRetryQuery,
     select: (data): PosterCardData[] =>
-      data.results.slice(0, limit).map((movie) => ({
-        id: String(movie.id),
-        title: movie.title,
-        meta: movie.release_date ? movie.release_date.slice(0, 4) : '',
-        imageUrl: tmdbPosterUrl(movie.poster_path),
-        ...(movie.vote_count > 0 && { rating: movie.vote_average }),
-        href: `/pelicula/${String(movie.id)}`,
-      })),
+      data.results.slice(0, limit).map((movie) => {
+        const rating = movie.vote_count > 0 ? movie.vote_average : undefined;
+        return {
+          id: String(movie.id),
+          title: movie.title,
+          meta: movie.release_date ? movie.release_date.slice(0, 4) : '',
+          imageUrl: tmdbPosterUrl(movie.poster_path),
+          ...(rating !== undefined && { rating }),
+          href: `/pelicula/${String(movie.id)}`,
+        };
+      }),
   });
 }

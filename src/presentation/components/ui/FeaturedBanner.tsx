@@ -24,14 +24,9 @@ export function FeaturedBanner({
   onAddToList,
 }: FeaturedBannerProps) {
   return (
-    <div className="relative rounded-xl overflow-hidden aspect-video min-h-[250px] lg:min-h-[400px] bg-background-surface max-w-full">
-      <div className="absolute inset-0 max-w-full overflow-hidden">
-        <img
-          src={imageUrl}
-          alt=""
-          className="w-full h-full object-cover max-w-full"
-          loading="eager"
-        />
+    <div className="relative rounded-xl overflow-hidden aspect-video min-h-[400px] bg-background-surface">
+      <div className="absolute inset-0">
+        <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent" />
       </div>
 

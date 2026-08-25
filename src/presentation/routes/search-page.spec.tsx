@@ -127,7 +127,7 @@ describe('Búsqueda', () => {
     mockSearchEndpoint([movieSummary()]);
     renderAt('/buscar?q=batman');
 
-    expect(await screen.findByRole('link', { name: 'Batman' })).toHaveAttribute(
+    expect(await screen.findByRole('link', { name: /Batman/ })).toHaveAttribute(
       'href',
       '/pelicula/268',
     );
@@ -138,7 +138,7 @@ describe('Búsqueda', () => {
     mockSearchEndpoint([movieSummary({ title: 'Batman' })], networkSpy);
 
     renderAt('/buscar?q=Batman%20');
-    await screen.findByRole('link', { name: 'Batman' });
+    await screen.findByRole('link', { name: /Batman/ });
     expect(networkSpy).toHaveBeenCalledTimes(1);
 
     const input = screen.getByLabelText(siteCopy.search.inputLabel);
@@ -149,7 +149,7 @@ describe('Búsqueda', () => {
     });
     vi.useRealTimers();
 
-    await screen.findByRole('link', { name: 'Batman' });
+    await screen.findByRole('link', { name: /Batman/ });
     // Misma clave de caché ("Batman " y "batman" normalizan igual) — TanStack
     // Query sirve el resultado ya cacheado, no dispara una segunda petición.
     expect(networkSpy).toHaveBeenCalledTimes(1);
@@ -162,6 +162,6 @@ describe('Búsqueda', () => {
     // navegación previa — como pegar el enlace en una pestaña nueva.
     renderAt('/buscar?q=Batman');
 
-    expect(await screen.findByRole('link', { name: 'Batman' })).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: /Batman/ })).toBeInTheDocument();
   });
 });

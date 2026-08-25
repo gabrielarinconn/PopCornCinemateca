@@ -21,7 +21,7 @@ export function SectionHeader({
       <div className="flex items-center gap-3">
         {accentBar && <div className="w-1 h-8 bg-brand rounded-full" aria-hidden="true" />}
         {Icon && <Icon className="w-5 h-5 text-brand" aria-hidden="true" />}
-        <h2 className="text-xl font-bold text-text-lavender tracking-tight">{title}</h2>
+        <h2 className="text-xl font-bold text-text-primary tracking-tight">{title}</h2>
       </div>
       {href && (
         <Link
