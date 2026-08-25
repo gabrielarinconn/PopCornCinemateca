@@ -48,7 +48,9 @@ export function MoviesPage() {
         <>
           <SectionHeader
             title={
-              activeGenre === ALL_GENRES_LABEL ? 'Obras Maestras del Cine' : `Género: ${activeGenre}`
+              activeGenre === ALL_GENRES_LABEL
+                ? 'Obras Maestras del Cine'
+                : `Género: ${activeGenre}`
             }
           />
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
