@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { Bell, Settings, Menu } from 'lucide-react';
 import { cn } from '@/presentation/lib/cn';
 import { IconButton } from '../ui/IconButton';
@@ -13,7 +14,15 @@ export function Navbar({
   searchPlaceholder?: string;
 }) {
   const [searchFocused, setSearchFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const searchRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  const submitSearch = () => {
+    const trimmed = searchQuery.trim();
+    if (trimmed.length === 0) return;
+    void navigate(`/buscar?q=${encodeURIComponent(trimmed)}`);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -52,16 +61,28 @@ export function Navbar({
         </div>
 
         <div className="flex items-center gap-4" ref={searchRef}>
-          <SearchInput
-            placeholder={searchPlaceholder}
-            onFocus={() => {
-              setSearchFocused(true);
+          <form
+            role="search"
+            onSubmit={(event) => {
+              event.preventDefault();
+              submitSearch();
             }}
-            onBlur={() => {
-              setSearchFocused(false);
-            }}
-            className={cn('w-[280px]', searchFocused && 'ring-2 ring-brand')}
-          />
+          >
+            <SearchInput
+              placeholder={searchPlaceholder}
+              value={searchQuery}
+              onChange={(event) => {
+                setSearchQuery(event.target.value);
+              }}
+              onFocus={() => {
+                setSearchFocused(true);
+              }}
+              onBlur={() => {
+                setSearchFocused(false);
+              }}
+              className={cn('w-[280px]', searchFocused && 'ring-2 ring-brand')}
+            />
+          </form>
 
           <IconButton icon={Bell} aria-label="Notificaciones" size="md" variant="ghost" />
           <IconButton icon={Settings} aria-label="Ajustes" size="md" variant="ghost" />
