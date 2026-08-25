@@ -20,7 +20,7 @@ export function useTrendingMovies(timeWindow: 'day' | 'week' = 'week', limit = 2
         title: movie.title,
         meta: movie.release_date ? movie.release_date.slice(0, 4) : '',
         imageUrl: tmdbPosterUrl(movie.poster_path),
-        rating: movie.vote_count > 0 ? movie.vote_average : undefined,
+        ...(movie.vote_count > 0 && { rating: movie.vote_average }),
         href: `/pelicula/${String(movie.id)}`,
       })),
   });

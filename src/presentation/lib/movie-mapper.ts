@@ -26,12 +26,13 @@ function ratingValue(rating: MovieSummary['rating']): number | undefined {
 }
 
 export function toPosterCardData(movie: MovieSummary): PosterCardData {
+  const rating = ratingValue(movie.rating);
   return {
     id: String(movie.id),
     title: movie.title,
     meta: formatMeta(movie),
     imageUrl: tmdbPosterUrl(movie.posterPath),
-    rating: ratingValue(movie.rating),
+    ...(rating !== undefined && { rating }),
     href: `/pelicula/${String(movie.id)}`,
   };
 }
@@ -41,6 +42,8 @@ export function toRankedFeatureData(
   rank: number,
   options?: { description?: string; simple?: boolean },
 ): RankedFeatureData {
+  const rating = ratingValue(movie.rating);
+  const watermark = movie.title.split(' ')[0]?.toUpperCase();
   return {
     id: String(movie.id),
     rank,
@@ -48,8 +51,8 @@ export function toRankedFeatureData(
     description: options?.description ?? movie.overview.slice(0, 160),
     meta: formatMeta(movie),
     imageUrl: tmdbPosterUrl(movie.posterPath),
-    rating: ratingValue(movie.rating),
-    watermark: movie.title.split(' ')[0]?.toUpperCase(),
+    ...(rating !== undefined && { rating }),
+    ...(watermark !== undefined && { watermark }),
     simple: options?.simple ?? rank > 1,
   };
 }

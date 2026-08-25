@@ -14,10 +14,11 @@ function FeaturedCard({
 }: {
   title: string;
   subtitle: string;
-  rating?: number | undefined;
+  rating?: number;
   imageUrl: string;
   onClick: () => void;
 }) {
+  const ratingValue = rating ?? 0;
   return (
     <button
       type="button"
@@ -33,10 +34,10 @@ function FeaturedCard({
       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
         <div className="flex items-center gap-2 mb-1">
-          {rating !== undefined && rating > 0 && (
+          {ratingValue > 0 && (
             <span className="flex items-center gap-1 text-xs font-medium text-yellow-400">
               <Star className="w-3 h-3 fill-yellow-400" />
-              {rating.toFixed(1)}
+              {ratingValue.toFixed(1)}
             </span>
           )}
           <span className="text-xs text-text-muted">{subtitle}</span>
@@ -75,7 +76,7 @@ export function ExplorePage() {
                 key={movie.id}
                 title={movie.title}
                 subtitle={movie.meta}
-                rating={movie.rating}
+                rating={movie.rating ?? 0}
                 imageUrl={movie.imageUrl}
                 onClick={() => {
                   void navigate(`/pelicula/${movie.id}`);
@@ -115,7 +116,7 @@ export function ExplorePage() {
                 key={show.id}
                 title={show.title}
                 subtitle={show.meta}
-                rating={show.rating}
+                rating={show.rating ?? 0}
                 imageUrl={show.imageUrl}
                 onClick={() => {
                   void navigate(`/serie/${show.id}`);

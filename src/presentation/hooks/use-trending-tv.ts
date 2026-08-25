@@ -20,7 +20,7 @@ export function useTrendingTv(timeWindow: 'day' | 'week' = 'week', limit = 20) {
         title: show.name,
         meta: show.first_air_date ? show.first_air_date.slice(0, 4) : '',
         imageUrl: tmdbPosterUrl(show.poster_path),
-        rating: show.vote_count > 0 ? show.vote_average : undefined,
+        ...(show.vote_count > 0 && { rating: show.vote_average }),
         href: `/serie/${String(show.id)}`,
       })),
   });
