@@ -64,7 +64,10 @@ flowchart TB
     Borders -->|Graceful Falls| PL
 
     %% Style assignments
-    class DL,AL,IL,PL domain application infrastructure presentation
+    class DL domain
+    class AL application
+    class IL infrastructure
+    class PL presentation
 
     %% Subgraph grouping
     subgraph CleanArch["Clean Architecture"]
@@ -282,7 +285,10 @@ flowchart TB
     Borders -->|Caídas Graceful| PL
 
     %% Asignación de estilos
-    class DL,AL,IL,PL domain application infrastructure presentation
+    class DL domain
+    class AL application
+    class IL infrastructure
+    class PL presentation
 
     %% Grupos
     subgraph CleanArch["Arquitectura Limpia"]
