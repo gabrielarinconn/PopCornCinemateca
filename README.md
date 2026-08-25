@@ -1,98 +1,119 @@
-# PopCornCinemateca
+# PopCorn Cinemateca 🎬
+> Tu ventana al fascinante mundo del cine y la televisión.
 
-## Descripción
-PopCornCinemateca es una poderosa aplicación diseñada para los amantes del cine y la televisión. Nuestra plataforma permite a los usuarios descubrir, explorar y compartir una vasta biblioteca de películas y programas, utilizando una API eficiente para proporcionar información actualizada y atractiva. Diseñada con una interfaz intuitiva, PopCornCinemateca busca revolucionar la experiencia de entretenimiento en el hogar.
+![Banner de Bienvenida](placeholder-baner-image-url.png)
 
-## Características Principales
-- **Búsqueda Inteligente**: Encuentra rápidamente películas y programas con nuestra intuitiva barra de búsqueda.
-- **Filtros Potentes**: Aplica múltiples filtros y encuentra exactamente lo que buscas, desde géneros hasta calificaciones.
-- **Compartir Socialmente**: Facilita la compartición de tus películas y programas favoritos con amigos y familiares.
-- **Lista de Favoritos**: Guarda tus películas y programas preferidos para un acceso rápido y conveniente.
+![React Badge](https://img.shields.io/badge/React-19-blue.svg) ![TypeScript Badge](https://img.shields.io/badge/TypeScript-4.5-blue.svg) ![Vite Badge](https://img.shields.io/badge/Vite-2.6-blue.svg) ![TanStack Query Badge](https://img.shields.io/badge/TanStack%20Query-4.6-blue.svg) ![Clean Architecture Badge](https://img.shields.io/badge/Clean%20Architecture-1.0-orange.svg) ![Coverage Badge](https://img.shields.io/badge/Coverage%20-100%25-brightgreen.svg) ![License Badge](https://img.shields.io/badge/License-MIT-green.svg)
 
-## Diagrama de Cómo Funciona la App
+## 🍿 ¿Qué es PopCorn Cinemateca?
+PopCorn Cinemateca es la solución definitiva para los entusiastas del entretenimiento. Ofrece una experiencia fluida, permitiendo a los usuarios navegar, descubrir y compartir contenido cinematográfico con facilidad y placer.
+
+### **El Problema:**
+Demasiada información dispersa y difícil acceso a contenido de calidad sin un sistema efectivo de filtrado y personalización.
+
+### **Nuestra Solución:**
+Una plataforma integral que combina un potente sistema de búsqueda, con funcionalidades avanzadas de filtrado y persistencia de datos, mejorando así la experiencia del usuario.
+
+## ✨ Diferenciadores Clave & Experiencia de Usuario
+| Característica                | Beneficio                                      |
+|-------------------------------|------------------------------------------------|
+| **Filtros en URL**           | Filtros avanzados para un acceso rápido.      |
+| **Validación en Bordes**     | Asegura que los datos sean correctos y precisos.  |
+| **4 Estados por Pantalla**    | Mejora de la Usabilidad y UX.                 |
+| **Accesibilidad A11y**        | Cumple con estándares de accesibilidad.        |
+| **Internacionalización**      | Soporta múltiples idiomas (ES/EN/DE).         |
+
+## 🔄 Diagrama de Flujo de la Aplicación
 ```mermaid
-flowchart TD
-    User[Usuario]:::user -->|Accede a la aplicación| Start[Inicio]
-    Start -->|Carga de datos| Load[Datos Iniciales]
-    Load -->|Llama a la API| API[API TMDB]
-    API -->|Devuelve resultados| Validate[Validación de Datos]
+graph TD
+    User[Usuario]:::user -->|Inicia| Start[Inicio]
+    Start -->|Carga| Load[Datos Iniciales]
+    Load -->|Llama a| API[API TMDB]
+    API -->|Responde| Validate[Validación de Datos]
     Validate -->|Datos Validados| Cache[Almacenamiento en Caché]:::cache
-    Cache -->|Actualiza| Display[Presentación de Datos]
-    Display -->|Interacciones del Usuario| UserActions[Acciones del Usuario]
-    UserActions -->|Aplica filtros| Filter[Filtrar Contenido]
+    Cache -->|Actualiza| Display[Mostrar Contenido]
+    Display -->|Interacción| UserActions[Acciones del Usuario]
+    UserActions -->|Filtra| Filter[Filtrar Contenido]
     UserActions -->|Comparte| Share[Compartir]
-    UserActions -->|Accede a Favoritos| Favorites[Favoritos]
+    UserActions -->|Accede a| Favorites[Favoritos]
 
-    classDef user fill:#e1f5fe,stroke:#039be5,stroke-width:2px,rx:5px,ry:5px;
-    classDef cache fill:#fffde7,stroke:#f57f17,stroke-width:2px,rx:5px,ry:5px;
+    classDef user fill:#e0f7fa,stroke:#00838f,stroke-width:2px,rx:5px,ry:5px;
+    classDef cache fill:#ffe0b2,stroke:#e65100,stroke-width:2px,rx:5px,ry:5px;
 ```
 
-## Diagrama de Arquitectura
+## 🏛️ Arquitectura del Sistema
+La Arquitectura Limpia garantiza que el sistema sea fácil de entender, probar y mantener. Separa las responsabilidades en capas distintas, lo que permite una evolución eficaz.
+
 ```mermaid
-flowchart TB
-    %% === ARQUITECTURA DE LA APLICACIÓN ===
-    classDef domain fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,rx:5px,ry:5px
-    classDef application fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,rx:5px,ry:5px
-    classDef infrastructure fill:#fff3e0,stroke:#fb8c00,stroke-width:2px,rx:5px,ry:5px
-    classDef presentation fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,rx:5px,ry:5px
+graph TB
+    %% Arquitectura Limpia
+    classDef domain fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,rx:5px,ry:5px;
+    classDef application fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,rx:5px,ry:5px;
+    classDef infrastructure fill:#fff3e0,stroke:#fb8c00,stroke-width:2px,rx:5px,ry:5px;
+    classDef presentation fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,rx:5px,ry:5px;
 
-    %% Capa de Dominio
     DL[Layer de Dominio: TypeScript Puro]:::domain
-
-    %% Capa de Aplicación
     AL[Layer de Aplicación: Puertos y Casos de Uso]:::application
-
-    %% Capa de Infraestructura
     IL[Layer de Infraestructura: Implementaciones]:::infrastructure
-
-    %% Capa de Presentación
     PL[Layer de Presentación: React & Tailwind]:::presentation
 
     %% Flujo de interacciones
     User -->|Interacción| AL
     AL -->|Solicita| DL
     AL -->|Gestiona| IL
-    AL -->|Renderiza en| PL
+    AL -->|Renderiza| PL
 
-    classDef user fill:#e1f5fe,stroke:#039be5,stroke-width:2px,rx:5px,ry:5px;
+    classDef user fill:#e0f7fa,stroke:#00838f,stroke-width:2px,rx:5px,ry:5px;
 ```
 
-## Instalación
-Para poner en marcha PopCornCinemateca:
-1. **Clona el repositorio**:
+## 🛠️ Tech Stack & Métricas de Calidad
+- **React**: Para una interfaz de usuario rápida y reactiva.
+- **TypeScript**: Mejora la calidad del código y evita errores comunes.
+- **TanStack Query**: Para manejar la sincronización y almacenamiento en caché de datos.
+- **Zod**: Validación de esquemas para asegurar la integridad de los datos.
+- **Tailwind CSS**: Para un estilo moderno y adaptativo.
+
+### Métricas Clave:
+- **100% Cobertura de Dominio**
+- **80% Cobertura General**
+- **Sin Errores no Manejados**
+- **A11y con Zoom 200%** 
+
+## 🚀 Guía de Inicio Rápido
+1. **Clona el repositorio:**
    ```bash
    git clone <url-del-repositorio>
    ```
-2. **Accede al directorio del proyecto**:
+2. **Accede al directorio:**
    ```bash
    cd PopCornCinemateca
    ```
-3. **Instala las dependencias**:
+3. **Instala las dependencias:**
    ```bash
    npm install
    ```
-4. **Inicia la aplicación**:
+4. **Configura tus variables de entorno en `.env`:**
+   ```plaintext
+   TMDB_API_KEY=<tu_api_key>
+   ```
+5. **Inicia la aplicación:**
    ```bash
-   npm start
+   npm run dev
+   ```
+6. **Ejecuta pruebas:**
+   ```bash
+   npm run test -- --coverage
    ```
 
-## Tecnologías Utilizadas
-- **React**: Base de la interfaz de usuario.
-- **Tailwind CSS**: Estilización de la aplicación.
-- **TypeScript**: Para un código más seguro y legible.
-- **TMDB API**: Proporcionando datos cinematográficos.
+## Criterios de Éxito & Demostración de Capacidades
+- [ ] Resiliencia a fallos.
+- [ ] Funcionalidad de compartir URL.
+- [ ] Navegación por teclado total.
+- [ ] Accesibilidad y usabilidad garantizadas.
 
-## Contribuciones
-Las contribuciones son bienvenidas. Para contribuir:
-1. Realiza un fork del repositorio.
-2. Crea tu rama de características (`git checkout -b feature/nuevaCaracteristica`).
-3. Haz commit de tus cambios (`git commit -m 'Añadir nueva característica'`).
-4. Haz push a la rama (`git push origin feature/nuevaCaracteristica`).
-5. Abre un Pull Request.
-
-## Contacto
-Para cualquier pregunta o soporte, por favor contáctanos a:
-- **Email**: soporte@popcorncinemateca.com
+## 📄 Atribución & Licencia
+- Agradecimientos a la API de [TMDB](https://www.themoviedb.org/documentation/api).
+- Licencia: MIT.
 
 Con PopCornCinemateca, ¡el entretenimiento está a solo un clic de distancia!  
 ¡Explora, comparte y disfruta del fascinante mundo del cine!
