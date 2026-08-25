@@ -1,29 +1,33 @@
 # PopCorn Cinemateca 🎬
+
 > Tu ventana al fascinante mundo del cine y la televisión.
 
-![Banner de Bienvenida](placeholder-baner-image-url.png)
-
-![React Badge](https://img.shields.io/badge/React-19-blue.svg) ![TypeScript Badge](https://img.shields.io/badge/TypeScript-4.5-blue.svg) ![Vite Badge](https://img.shields.io/badge/Vite-2.6-blue.svg) ![TanStack Query Badge](https://img.shields.io/badge/TanStack%20Query-4.6-blue.svg) ![Clean Architecture Badge](https://img.shields.io/badge/Clean%20Architecture-1.0-orange.svg) ![Coverage Badge](https://img.shields.io/badge/Coverage%20-100%25-brightgreen.svg) ![License Badge](https://img.shields.io/badge/License-MIT-green.svg)
+![React Badge](https://img.shields.io/badge/React-19-blue.svg) ![TypeScript Badge](https://img.shields.io/badge/TypeScript-6-blue.svg) ![Vite Badge](https://img.shields.io/badge/Vite-8-blue.svg) ![TanStack Query Badge](https://img.shields.io/badge/TanStack%20Query-5-blue.svg) ![Clean Architecture Badge](https://img.shields.io/badge/Clean%20Architecture-1.0-orange.svg) ![Coverage Badge](https://img.shields.io/badge/Coverage%20-100%25-brightgreen.svg)
 
 ## 🍿 ¿Qué es PopCorn Cinemateca?
+
 PopCorn Cinemateca es la solución definitiva para los entusiastas del entretenimiento. Ofrece una experiencia fluida, permitiendo a los usuarios navegar, descubrir y compartir contenido cinematográfico con facilidad y placer.
 
 ### **El Problema:**
+
 Demasiada información dispersa y difícil acceso a contenido de calidad sin un sistema efectivo de filtrado y personalización.
 
 ### **Nuestra Solución:**
+
 Una plataforma integral que combina un potente sistema de búsqueda, con funcionalidades avanzadas de filtrado y persistencia de datos, mejorando así la experiencia del usuario.
 
 ## ✨ Diferenciadores Clave & Experiencia de Usuario
-| Característica                | Beneficio                                      |
-|-------------------------------|------------------------------------------------|
-| **Filtros en URL**           | Filtros avanzados para un acceso rápido.      |
-| **Validación en Bordes**     | Asegura que los datos sean correctos y precisos.  |
-| **4 Estados por Pantalla**    | Mejora de la Usabilidad y UX.                 |
-| **Accesibilidad A11y**        | Cumple con estándares de accesibilidad.        |
-| **Internacionalización**      | Soporta múltiples idiomas (ES/EN/DE).         |
+
+| Característica             | Beneficio                                        |
+| -------------------------- | ------------------------------------------------ |
+| **Filtros en URL**         | Filtros avanzados para un acceso rápido.         |
+| **Validación en Bordes**   | Asegura que los datos sean correctos y precisos. |
+| **4 Estados por Pantalla** | Mejora de la Usabilidad y UX.                    |
+| **Accesibilidad A11y**     | Cumple con estándares de accesibilidad.          |
+| **Internacionalización**   | Soporta múltiples idiomas (ES/EN/DE).            |
 
 ## 🔄 Diagrama de Flujo de la Aplicación
+
 ```mermaid
 graph TD
     User[Usuario]:::user -->|Inicia| Start[Inicio]
@@ -42,6 +46,7 @@ graph TD
 ```
 
 ## 🏛️ Arquitectura del Sistema
+
 La Arquitectura Limpia garantiza que el sistema sea fácil de entender, probar y mantener. Separa las responsabilidades en capas distintas, lo que permite una evolución eficaz.
 
 ```mermaid
@@ -67,6 +72,7 @@ graph TB
 ```
 
 ## 🛠️ Tech Stack & Métricas de Calidad
+
 - **React**: Para una interfaz de usuario rápida y reactiva.
 - **TypeScript**: Mejora la calidad del código y evita errores comunes.
 - **TanStack Query**: Para manejar la sincronización y almacenamiento en caché de datos.
@@ -74,12 +80,14 @@ graph TB
 - **Tailwind CSS**: Para un estilo moderno y adaptativo.
 
 ### Métricas Clave:
+
 - **100% Cobertura de Dominio**
 - **80% Cobertura General**
 - **Sin Errores no Manejados**
-- **A11y con Zoom 200%** 
+- **A11y con Zoom 200%**
 
 ## 🚀 Guía de Inicio Rápido
+
 1. **Clona el repositorio:**
    ```bash
    git clone <url-del-repositorio>
@@ -88,32 +96,33 @@ graph TB
    ```bash
    cd PopCornCinemateca
    ```
-3. **Instala las dependencias:**
+3. **Instala las dependencias** (el proyecto usa `pnpm`, fijado en `package.json`):
    ```bash
-   npm install
+   pnpm install
    ```
-4. **Configura tus variables de entorno en `.env`:**
+4. **Configura tu variable de entorno en `.env`** (copia `.env.example`):
    ```plaintext
-   TMDB_API_KEY=<tu_api_key>
+   VITE_TMDB_TOKEN=<tu-api-read-access-token-de-tmdb>
    ```
 5. **Inicia la aplicación:**
    ```bash
-   npm run dev
+   pnpm dev
    ```
-6. **Ejecuta pruebas:**
+6. **Ejecuta pruebas con cobertura** (`pnpm test` ya corre `vitest run --coverage`):
    ```bash
-   npm run test -- --coverage
+   pnpm test
    ```
 
 ## Criterios de Éxito & Demostración de Capacidades
+
 - [ ] Resiliencia a fallos.
 - [ ] Funcionalidad de compartir URL.
 - [ ] Navegación por teclado total.
 - [ ] Accesibilidad y usabilidad garantizadas.
 
-## 📄 Atribución & Licencia
-- Agradecimientos a la API de [TMDB](https://www.themoviedb.org/documentation/api).
-- Licencia: MIT.
+## 📄 Atribución
+
+Este producto usa la API de [TMDB](https://www.themoviedb.org/documentation/api) pero no está avalado ni certificado por TMDB.
 
 Con PopCornCinemateca, ¡el entretenimiento está a solo un clic de distancia!  
 ¡Explora, comparte y disfruta del fascinante mundo del cine!
