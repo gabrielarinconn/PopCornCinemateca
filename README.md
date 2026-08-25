@@ -1,13 +1,13 @@
 # PopCornCinemateca
 
 ## Introducción
-PopCornCinemateca es una innovadora aplicación diseñada para los apasionados del cine. Con nuestra plataforma, los usuarios pueden explorar, filtrar y compartir información sobre una amplia variedad de películas y programas de televisión. Utilizamos una API robusta para ofrecer contenido actualizado y relevante, brindando a los usuarios una experiencia impecable y atractiva.
+PopCornCinemateca es una plataforma de vanguardia diseñada para los entusiastas del cine y la televisión. Esta aplicación permite a los usuarios descubrir, explorar y compartir una vasta colección de películas y programas de televisión, aprovechando una API confiable y bien documentada. Con un enfoque en la experiencia del usuario, buscamos transformar la forma en que accedes y disfrutas del contenido audiovisual.
 
 ## Características Principales
-- **Exploración Eficiente**: Busca y descubre películas y programas de manera fácil y rápida.
-- **Filtros Personalizables**: Aplica filtros avanzados para encontrar contenido adaptado a tus preferencias.
-- **Interacción Social**: Comparte tus descubrimientos con amigos y familiares de forma sencilla.
-- **Acceso a Favoritos**: Guarda tus películas y programas preferidos para acceder a ellos en cualquier momento.
+- **Búsqueda Eficaz**: Encuentra rápidamente películas y programas usando nuestra interfaz intuitiva.
+- **Filtros Avanzados**: Personaliza tu búsqueda mediante filtros que te permiten encontrar exactamente lo que deseas.
+- **Función de Compartir**: Comparte fácilmente enlaces a películas y programas con amigos y familiares.
+- **Favoritos**: Guarda tus títulos preferidos y accede a ellos de manera instantánea.
 
 ## Diagrama de Cómo Funciona la App
 ```mermaid
@@ -58,22 +58,29 @@ flowchart TB
 ```
 
 ## Instrucciones de Uso
-Para comenzar a disfrutar de PopCornCinemateca, sigue estos pasos:
-1. Clona el repositorio:
+Para comenzar a disfrutar de PopCornCinemateca:
+1. **Clona el repositorio**:
    ```bash
    git clone <url-del-repositorio>
    ```
-2. Instala las dependencias:
+2. **Instala las dependencias**:
    ```bash
    npm install
    ```
-3. Inicia la aplicación:
+3. **Inicia la aplicación**:
    ```bash
    npm start
    ```
 
+## Preguntas Frecuentes (FAQs)
+**¿Es PopCornCinemateca gratuita?**  
+Sí, puedes acceder a todas las funcionalidades sin costo alguno.  
+
+**¿Qué tipo de contenido puedo encontrar?**  
+Ofrecemos una amplia variedad de películas y programas de televisión de diferentes géneros y épocas.  
+
 ## Contacto
-Si tienes preguntas o necesitas soporte, no dudes en contactarnos a:
+Si tienes alguna pregunta o necesitas asistencia técnica, no dudes en contactar:
 - **Email**: soporte@popcorncinemateca.com
 
 ¡Explora y disfruta del fascinante mundo del cine con PopCornCinemateca!
