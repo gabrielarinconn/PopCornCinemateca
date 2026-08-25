@@ -9,6 +9,7 @@ import { useMovieRecommendations } from '@/presentation/hooks/use-movie-recommen
 import { useSaveMovie } from '@/presentation/hooks/use-save-movie';
 import { useIsMovieSaved } from '@/presentation/hooks/use-library-movies';
 import { formatMoney } from '@/domain/shared/money';
+import { voteCountLabel } from '@/domain/shared/vote-count';
 import { DomainNotFoundError } from '@/domain/shared/errors/api-errors';
 import { tmdbBackdropUrl, tmdbPosterUrl, tmdbProfileUrl } from '@/presentation/lib/tmdb-image';
 import { TrailerEmbed } from '@/presentation/components/ui/TrailerEmbed';
@@ -19,13 +20,6 @@ import { NotFoundPage } from './not-found-page';
 import { toPosterCardData } from '@/presentation/lib/movie-mapper';
 
 const MovieIdParamSchema = z.coerce.number().int().positive();
-
-function voteCountLabel(voteCount: number, locale: string): string {
-  const pluralRules = new Intl.PluralRules(locale);
-  const formattedCount = new Intl.NumberFormat(locale).format(voteCount);
-  const word = pluralRules.select(voteCount) === 'one' ? 'voto' : 'votos';
-  return `${formattedCount} ${word}`;
-}
 
 export function MovieDetailPage() {
   const params = useParams<{ movieId: string }>();

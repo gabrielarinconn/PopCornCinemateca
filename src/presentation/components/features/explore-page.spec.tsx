@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { AppProviders } from '@/presentation/providers/app-providers';
 import { routes } from '@/presentation/routes/router';
 import { server } from '@/test/msw/server';
+import { expectNoA11yViolations } from '@/test/axe';
 
 // Servidor MSW global — ver el comentario en configuration.spec.ts.
 
@@ -55,12 +56,12 @@ function mockTrendingEndpoints() {
 
 function renderAt(initialPath: string) {
   const router = createMemoryRouter(routes, { initialEntries: [initialPath] });
-  render(
+  const { container } = render(
     <AppProviders>
       <RouterProvider router={router} />
     </AppProviders>,
   );
-  return router;
+  return { router, container };
 }
 
 describe('ExplorePage', () => {
@@ -74,5 +75,13 @@ describe('ExplorePage', () => {
     // necesitan este margen extra.
     expect(await screen.findByText('Nexus Protocol', {}, { timeout: 5000 })).toBeInTheDocument();
     expect(screen.getByText('Dark Matter')).toBeInTheDocument();
+  });
+
+  it('no tiene violaciones de accesibilidad críticas o serias (también cubre Inicio, que redirige aquí)', async () => {
+    mockTrendingEndpoints();
+    const { container } = renderAt('/explore');
+
+    await screen.findByText('Nexus Protocol');
+    await expectNoA11yViolations(container);
   });
 });

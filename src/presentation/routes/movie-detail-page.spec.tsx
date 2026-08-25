@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { AppProviders } from '@/presentation/providers/app-providers';
 import { routes } from '@/presentation/routes/router';
 import { server } from '@/test/msw/server';
+import { expectNoA11yViolations } from '@/test/axe';
 
 // Servidor MSW global — ver el comentario en configuration.spec.ts.
 
@@ -42,12 +43,12 @@ function mockMovieEndpoint(overrides: Record<string, unknown> = {}) {
 
 function renderAt(initialPath: string) {
   const router = createMemoryRouter(routes, { initialEntries: [initialPath] });
-  render(
+  const { container } = render(
     <AppProviders>
       <RouterProvider router={router} />
     </AppProviders>,
   );
-  return router;
+  return { router, container };
 }
 
 describe('Ficha de película', () => {
@@ -217,5 +218,13 @@ describe('Ficha de película', () => {
 
     expect(await screen.findByText('No pudimos cargar esta película.')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
+  });
+
+  it('no tiene violaciones de accesibilidad críticas o serias', async () => {
+    mockMovieEndpoint();
+    const { container } = renderAt('/pelicula/550');
+
+    await screen.findByRole('heading', { name: 'Fight Club' });
+    await expectNoA11yViolations(container);
   });
 });
