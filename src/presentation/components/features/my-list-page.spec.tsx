@@ -1,31 +1,60 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import { describe, expect, it } from 'vitest';
+import type { ReactNode } from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { SavedMovie } from '@/application/ports/library-storage.port';
+import { libraryStoragePort } from '@/infrastructure/storage/library-storage.adapter';
+import { libraryQueryKey } from '@/presentation/hooks/use-library-movies';
 import { MyListPage } from './my-list-page';
 
-describe('MyListPage', () => {
-  it('muestra "Continuar Viendo" y "Guardados Recientemente" con contenido', () => {
-    render(
-      <MemoryRouter>
-        <MyListPage />
-      </MemoryRouter>,
-    );
+const movie: SavedMovie = {
+  id: 550,
+  title: 'Fight Club',
+  posterPath: '/poster.jpg',
+  savedAt: '2026-01-01T00:00:00.000Z',
+};
 
-    expect(screen.getByRole('heading', { name: 'Mi Lista' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Continuar Viendo' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Guardados Recientemente' })).toBeInTheDocument();
-    expect(screen.getByText('Crónicas de Acero')).toBeInTheDocument();
+function renderWithLibrary(initialLibrary: SavedMovie[]) {
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  queryClient.setQueryData(libraryQueryKey, initialLibrary);
+  const Wrapper = ({ children }: { children: ReactNode }) => (
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>{children}</MemoryRouter>
+    </QueryClientProvider>
+  );
+  render(<MyListPage />, { wrapper: Wrapper });
+  return queryClient;
+}
+
+describe('MyListPage', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+  afterEach(() => {
+    localStorage.clear();
+    vi.restoreAllMocks();
   });
 
-  it('el botón "Editar Lista" alterna su propio texto a "Cancelar"', () => {
-    render(
-      <MemoryRouter>
-        <MyListPage />
-      </MemoryRouter>,
-    );
+  it('con la lista vacía, muestra el estado vacío', () => {
+    renderWithLibrary([]);
+    expect(screen.getByText('Tu lista está vacía')).toBeInTheDocument();
+  });
 
-    const editButton = screen.getByRole('button', { name: 'Editar Lista' });
-    fireEvent.click(editButton);
-    expect(screen.getByRole('button', { name: 'Cancelar' })).toBeInTheDocument();
+  it('con películas guardadas, las muestra y cuenta cuántas hay', () => {
+    renderWithLibrary([movie]);
+    expect(screen.getByText('Fight Club')).toBeInTheDocument();
+    expect(screen.getByText('1 película guardada.')).toBeInTheDocument();
+  });
+
+  it('el botón de eliminar quita la película de la lista', async () => {
+    vi.spyOn(libraryStoragePort, 'removeMovie').mockImplementation(() => undefined);
+    renderWithLibrary([movie]);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Eliminar Fight Club' }));
+
+    await waitFor(() => {
+      expect(screen.getByText('Tu lista está vacía')).toBeInTheDocument();
+    });
   });
 });
