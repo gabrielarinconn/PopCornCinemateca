@@ -1,5 +1,5 @@
 export const siteCopy = {
-  appName: 'Cineteca',
+  appName: 'popCorn',
   header: {
     home: 'Inicio',
   },
@@ -28,5 +28,18 @@ export const siteCopy = {
     trailersLabel: 'Tráilers',
     recommendationsLabel: 'Recomendadas',
     watchOnYouTube: 'Ver en YouTube',
+  },
+  search: {
+    title: 'Buscar',
+    heading: 'Buscar películas',
+    inputLabel: 'Buscar películas',
+    placeholder: 'Escribe el título de una película...',
+    loading: 'Buscando...',
+    error: 'No pudimos completar la búsqueda.',
+    retry: 'Reintentar',
+    emptyInitialTitle: 'Busca algo para empezar',
+    emptyInitialDescription: 'Escribe el título de una película para ver resultados.',
+    noResultsTitle: 'Sin resultados',
+    noResultsDescription: 'No encontramos películas que coincidan con tu búsqueda.',
   },
 } as const;
