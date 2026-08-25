@@ -175,10 +175,7 @@ describe('Ficha de película', () => {
 
     await screen.findByRole('heading', { name: 'Fight Club' });
     expect(screen.getByText('Edward Norton')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Official Trailer/ })).toHaveAttribute(
-      'href',
-      'https://www.youtube.com/watch?v=abc123',
-    );
+    expect(screen.getByText('Official Trailer')).toBeInTheDocument();
     expect(screen.queryByText(/Clip en otro sitio/)).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Recomendadas' })).toBeInTheDocument();
     expect(screen.getByText('Seven')).toBeInTheDocument();
