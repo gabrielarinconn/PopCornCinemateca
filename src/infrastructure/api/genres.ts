@@ -13,8 +13,10 @@ export const GenresResponseSchema = z.object({
 
 export type GenresResponse = z.infer<typeof GenresResponseSchema>;
 
-export const getGenres = async (): Promise<GenresResponse> => {
-  const { data } = await tmdbClient.get<unknown>('/genre/movie/list');
+export type GenreMediaType = 'movie' | 'tv';
+
+export const getGenres = async (mediaType: GenreMediaType = 'movie'): Promise<GenresResponse> => {
+  const { data } = await tmdbClient.get<unknown>(`/genre/${mediaType}/list`);
   const parsed = GenresResponseSchema.safeParse(data);
 
   if (!parsed.success) {

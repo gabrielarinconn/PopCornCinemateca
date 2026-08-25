@@ -38,25 +38,6 @@ export function MoviesPage() {
         </p>
       </header>
 
-      <SectionHeader title="Tendencias de la Semana" accentBar />
-
-      {trendingLoading ? (
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3" aria-busy="true">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={`skeleton-trending-${String(i)}`}
-              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
-          {(trending ?? []).map((movie) => (
-            <PosterCard key={movie.id} {...movie} />
-          ))}
-        </div>
-      )}
-
       <FilterPillGroup
         options={genreFilterOptions}
         active={activeGenre}
@@ -65,7 +46,11 @@ export function MoviesPage() {
 
       {masterpieces.length > 0 && (
         <>
-          <SectionHeader title="Obras Maestras del Cine" />
+          <SectionHeader
+            title={
+              activeGenre === ALL_GENRES_LABEL ? 'Obras Maestras del Cine' : `Género: ${activeGenre}`
+            }
+          />
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
             {masterpieces.map((item) => (
               <PosterCard key={item.id} {...item} />
@@ -84,6 +69,25 @@ export function MoviesPage() {
             </div>
           )}
         </>
+      )}
+
+      <SectionHeader title="Tendencias de la Semana" accentBar />
+
+      {trendingLoading ? (
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3" aria-busy="true">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={`skeleton-trending-${String(i)}`}
+              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
+          {(trending ?? []).map((movie) => (
+            <PosterCard key={movie.id} {...movie} />
+          ))}
+        </div>
       )}
     </PageContainer>
   );
