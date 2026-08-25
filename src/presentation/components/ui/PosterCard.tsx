@@ -11,9 +11,20 @@ export interface PosterCardProps {
   href?: string | undefined;
 }
 
+const ratingFormatter = new Intl.NumberFormat('es', {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+});
+
 export function PosterCard({ title, meta, imageUrl, rating, badge, href }: PosterCardProps) {
+  const ratingLabel = rating !== undefined ? `${ratingFormatter.format(rating)} de 10` : undefined;
+  // Nombre accesible completo en un solo enlace ("El padrino, 1972, 8,7 de
+  // 10") — nunca solo el título, para que quien usa lector de pantalla
+  // tenga toda la información sin tener que entrar a la ficha.
+  const accessibleName = [title, meta, ratingLabel].filter(Boolean).join(', ');
+
   const cardContent = (
-    <div className="group relative aspect-[2/3] rounded-lg overflow-hidden bg-background-surface">
+    <div className="group relative aspect-poster rounded-lg overflow-hidden bg-background-surface">
       <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
         <img src={imageUrl} alt="" className="w-full h-full object-cover" loading="lazy" />
       </div>
@@ -26,10 +37,10 @@ export function PosterCard({ title, meta, imageUrl, rating, badge, href }: Poste
         </div>
       )}
 
-      {rating && (
+      {rating !== undefined && (
         <div className="absolute top-2 right-2 z-10 flex items-center gap-1 rounded-full bg-black/80 backdrop-blur-sm px-2 py-1">
           <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-          <span className="text-xs font-medium text-white">{rating.toFixed(1)}</span>
+          <span className="text-xs font-medium text-white">{ratingFormatter.format(rating)}</span>
         </div>
       )}
 
@@ -62,7 +73,7 @@ export function PosterCard({ title, meta, imageUrl, rating, badge, href }: Poste
 
   if (href) {
     return (
-      <Link to={href} className="block group">
+      <Link to={href} className="block group" aria-label={accessibleName}>
         {cardContent}
         {metaContent}
       </Link>

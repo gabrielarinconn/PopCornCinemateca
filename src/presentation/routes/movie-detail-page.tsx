@@ -115,7 +115,7 @@ function MovieDetailContent({ movieId }: { movieId: number }) {
       <div className="relative -mt-24 z-10 px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/3 flex-shrink-0">
-            <div className="relative aspect-[2/3] rounded-xl overflow-hidden bg-background-surface max-w-[280px] shadow-elevated">
+            <div className="relative aspect-poster rounded-xl overflow-hidden bg-background-surface max-w-[280px] shadow-elevated">
               <img
                 src={tmdbPosterUrl(movie.posterPath, 'w500')}
                 alt={`Póster de ${movie.title}`}

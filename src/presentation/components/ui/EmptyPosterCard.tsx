@@ -9,7 +9,7 @@ export interface EmptyPosterCardProps {
 
 export function EmptyPosterCard({ title, meta, href }: EmptyPosterCardProps) {
   const cardContent = (
-    <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-background-surface flex items-center justify-center">
+    <div className="relative aspect-poster rounded-lg overflow-hidden bg-background-surface flex items-center justify-center">
       <Film className="w-12 h-12 text-text-muted" aria-hidden="true" />
     </div>
   );

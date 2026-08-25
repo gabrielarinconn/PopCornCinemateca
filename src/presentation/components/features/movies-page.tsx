@@ -1,11 +1,20 @@
-import { SectionHeader, PosterCard } from '@/presentation/components/ui';
+import { useState } from 'react';
+import { SectionHeader, PosterCard, FilterPillGroup } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useTrendingMovies } from '@/presentation/hooks/use-trending-movies';
 import { useDiscoverMovies } from '@/presentation/hooks/use-discover-movies';
+import { useGenres } from '@/presentation/hooks/use-genres';
 import { toPosterCardData } from '@/presentation/lib/movie-mapper';
+
+const ALL_GENRES_LABEL = 'Todos';
 
 export function MoviesPage() {
   const { data: trending, isLoading: trendingLoading } = useTrendingMovies('week', 20);
+  const { data: genres } = useGenres();
+  const [activeGenre, setActiveGenre] = useState(ALL_GENRES_LABEL);
+
+  const selectedGenreId = genres?.find((genre) => genre.name === activeGenre)?.id;
+
   const {
     data: topRated,
     fetchNextPage,
@@ -14,9 +23,11 @@ export function MoviesPage() {
   } = useDiscoverMovies({
     sortBy: 'vote_average.desc',
     minVoteCount: 500,
+    genreId: selectedGenreId,
   });
 
   const masterpieces = (topRated?.pages ?? []).flatMap((page) => page.movies).map(toPosterCardData);
+  const genreFilterOptions = [ALL_GENRES_LABEL, ...(genres ?? []).map((genre) => genre.name)];
 
   return (
     <PageContainer className="space-y-10">
@@ -34,7 +45,7 @@ export function MoviesPage() {
           {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={`skeleton-trending-${String(i)}`}
-              className="aspect-[2/3] rounded-lg bg-background-surface animate-pulse"
+              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
             />
           ))}
         </div>
@@ -45,6 +56,12 @@ export function MoviesPage() {
           ))}
         </div>
       )}
+
+      <FilterPillGroup
+        options={genreFilterOptions}
+        active={activeGenre}
+        onChange={setActiveGenre}
+      />
 
       {masterpieces.length > 0 && (
         <>

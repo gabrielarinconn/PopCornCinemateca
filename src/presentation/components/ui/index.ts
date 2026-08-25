@@ -13,3 +13,4 @@ export * from './ContinueWatchingCard';
 export * from './FilterPillGroup';
 export * from './SidebarUserProfile';
 export * from './MiniPlayerBar';
+export * from './VirtualizedPosterGrid';

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
@@ -20,7 +20,7 @@ function movieResult(id: number, title: string) {
   };
 }
 
-function mockEndpoints() {
+function mockEndpoints(onDiscoverRequest?: (genreId: string | null) => void) {
   server.use(
     http.get('https://api.themoviedb.org/3/trending/movie/week', () =>
       HttpResponse.json({
@@ -30,14 +30,24 @@ function mockEndpoints() {
         total_results: 1,
       }),
     ),
-    http.get('https://api.themoviedb.org/3/discover/movie', () =>
+    http.get('https://api.themoviedb.org/3/genre/movie/list', () =>
       HttpResponse.json({
-        page: 1,
-        results: [movieResult(2, 'Eclipse Eterno')],
-        total_pages: 1,
-        total_results: 1,
+        genres: [
+          { id: 28, name: 'Acción' },
+          { id: 18, name: 'Drama' },
+        ],
       }),
     ),
+    http.get('https://api.themoviedb.org/3/discover/movie', ({ request }) => {
+      const genreId = new URL(request.url).searchParams.get('with_genres');
+      onDiscoverRequest?.(genreId);
+      return HttpResponse.json({
+        page: 1,
+        results: [movieResult(genreId ? 3 : 2, genreId ? 'Danza Final' : 'Eclipse Eterno')],
+        total_pages: 1,
+        total_results: 1,
+      });
+    }),
   );
 }
 
@@ -59,5 +69,31 @@ describe('MoviesPage', () => {
     expect(await screen.findByText('Nexus Protocol', {}, { timeout: 5000 })).toBeInTheDocument();
     expect(await screen.findByText('Eclipse Eterno')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Películas' })).toBeInTheDocument();
+  });
+
+  it('al elegir un género real, filtra las obras maestras por ese género', async () => {
+    mockEndpoints();
+    renderAt('/movies');
+
+    const genreFilter = await screen.findByRole('button', { name: 'Acción' }, { timeout: 5000 });
+    fireEvent.click(genreFilter);
+
+    expect(await screen.findByText('Danza Final')).toBeInTheDocument();
+    expect(genreFilter).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('envía el id real del género elegido como filtro `with_genres`', async () => {
+    let capturedGenreId: string | null = null;
+    mockEndpoints((genreId) => {
+      capturedGenreId = genreId;
+    });
+    renderAt('/movies');
+
+    const genreFilter = await screen.findByRole('button', { name: 'Drama' }, { timeout: 5000 });
+    fireEvent.click(genreFilter);
+
+    await waitFor(() => {
+      expect(capturedGenreId).toBe('18');
+    });
   });
 });

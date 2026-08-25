@@ -71,7 +71,7 @@ export function SearchPage() {
             {Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={`skeleton-search-${String(i)}`}
-                className="aspect-[2/3] rounded-lg bg-background-surface animate-pulse"
+                className="aspect-poster rounded-lg bg-background-surface animate-pulse"
               />
             ))}
           </div>

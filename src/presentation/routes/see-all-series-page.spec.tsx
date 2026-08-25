@@ -1,10 +1,11 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { http, HttpResponse } from 'msw';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { AppProviders } from '@/presentation/providers/app-providers';
 import { routes } from '@/presentation/routes/router';
 import { server } from '@/test/msw/server';
+import { mockElementSize } from '@/test/mock-element-size';
 
 // Servidor MSW global — ver el comentario en configuration.spec.ts.
 
@@ -31,6 +32,14 @@ function renderAt(initialPath: string) {
 }
 
 describe('SeeAllSeriesPage', () => {
+  let restoreElementSize: () => void;
+  beforeEach(() => {
+    restoreElementSize = mockElementSize(1024, 800);
+  });
+  afterEach(() => {
+    restoreElementSize();
+  });
+
   it('trae la primera página y carga la siguiente con el botón "Cargar más"', async () => {
     server.use(
       http.get('https://api.themoviedb.org/3/discover/tv', ({ request }) => {

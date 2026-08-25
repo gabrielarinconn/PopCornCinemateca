@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import { PosterCard } from '@/presentation/components/ui';
+import { VirtualizedPosterGrid } from '@/presentation/components/ui';
 import { PageContainer } from '@/presentation/components/layout/PageContainer';
 import { useDiscoverTv } from '@/presentation/hooks/use-discover-tv';
 import { toTvPosterCardData } from '@/presentation/lib/tv-mapper';
@@ -36,16 +36,12 @@ export function SeeAllSeriesPage() {
           {Array.from({ length: 30 }).map((_, i) => (
             <div
               key={`skeleton-all-series-${String(i)}`}
-              className="aspect-[2/3] rounded-lg bg-background-surface animate-pulse"
+              className="aspect-poster rounded-lg bg-background-surface animate-pulse"
             />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
-          {series.map((show) => (
-            <PosterCard key={show.id} {...show} />
-          ))}
-        </div>
+        <VirtualizedPosterGrid items={series} />
       )}
 
       {hasNextPage && (
